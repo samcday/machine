@@ -1,5 +1,4 @@
 ---
 - name: refresh pacman
-  become: yes
   community.general.pacman:
     update_cache: yes

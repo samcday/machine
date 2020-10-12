@@ -1,6 +1,5 @@
 ---
 - name: add sublime-text repo to pacman.conf
-  become: yes
   ansible.builtin.blockinfile:
     path: /etc/pacman.conf
     block: |
@@ -12,6 +11,5 @@
   meta: flush_handlers
   
 - name: install sublime-text
-  become: yes
   community.general.pacman:
     name: sublime-text

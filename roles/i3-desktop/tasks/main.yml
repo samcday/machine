@@ -4,7 +4,7 @@
     name:
     - xorg-server
     - i3-wm
-    - i3-status
+    - i3status
     - lightdm
     - lightdm-gtk-greeter
     - alacritty

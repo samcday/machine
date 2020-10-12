@@ -4,7 +4,6 @@
     name: zsh
 
 - name: add zsh pacman hook
-  become: yes
   ansible.builtin.copy:
     src: zsh-rehash.hook
     dest: /etc/pacman.d/hooks/

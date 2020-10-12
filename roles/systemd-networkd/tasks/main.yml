@@ -1,6 +1,5 @@
 ---
 - name: setup wired network config
-  become: true
   ansible.builtin.copy:
     src: 20-wired.network
     dest: /etc/systemd/network/20-wired.network
