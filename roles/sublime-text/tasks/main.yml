@@ -1,0 +1,17 @@
+---
+- name: add sublime-text repo to pacman.conf
+  become: yes
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    block: |
+      [sublime-text]
+      Server = https://download.sublimetext.com/arch/stable/x86_64
+  notify: refresh pacman
+
+- name: Flush handlers
+  meta: flush_handlers
+  
+- name: install sublime-text
+  become: yes
+  community.general.pacman:
+    name: sublime-text
