@@ -1,5 +1,8 @@
 ---
 - hosts: localhost
   roles:
+    - core
     - zsh
     - sublime-text
+    - systemd-homed
+    - i3-desktop

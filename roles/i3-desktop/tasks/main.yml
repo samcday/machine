@@ -1,0 +1,15 @@
+---
+- name: install packages
+  community.general.pacman:
+    name:
+    - xorg-server
+    - i3-wm
+    - lightdm
+    - lightdm-gtk-greeter
+    - alacritty
+    - dmenu
+
+- name: enable lightdm
+  ansible.builtin.systemd:
+    name: lightdm.service
+    enabled: yes

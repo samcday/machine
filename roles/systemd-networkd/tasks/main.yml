@@ -1,0 +1,19 @@
+---
+- name: setup wired network config
+  become: true
+  ansible.builtin.copy:
+    src: 20-wired.network
+    dest: /etc/systemd/network/20-wired.network
+  notify: reload systemd-networkd
+
+- name: ensure systemd-networkd is running + enabled.
+  ansible.builtin.systemd:
+    name: systemd-networkd.service
+    state: started
+    enabled: yes
+
+- name: ensure systemd-resolved is running + enabled.
+  ansible.builtin.systemd:
+    name: systemd-resolved.service
+    state: started
+    enabled: yes

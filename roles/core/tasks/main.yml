@@ -1,0 +1,21 @@
+---
+- name: install some core packages
+  community.general.pacman:
+    name:
+    - base-devel
+    - sudo
+    - git
+    - noto-fonts
+    - firefox-developer-edition
+
+- name: wheel sudoers rule
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^%wheel ALL='
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: /usr/bin/visudo -cf %s
+
+- name: enable en_US UTF8 locale
+  community.general.locale_gen:
+    name: en_US.UTF-8
+    state: present
