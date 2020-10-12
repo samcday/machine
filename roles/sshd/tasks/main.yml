@@ -1,0 +1,9 @@
+---
+- name: install openssh
+  community.general.pacman: name=openssh
+
+- name: enable+start sshd
+  ansible.builtin.systemd:
+    name: sshd
+    enabled: yes
+    state: started
