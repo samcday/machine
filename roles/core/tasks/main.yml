@@ -5,6 +5,7 @@
     - base-devel
     - firefox-developer-edition
     - git
+    - multipath-tools
     - noto-fonts
     - pacman-contrib
     - pacutils
