@@ -6,6 +6,7 @@
     - firefox-developer-edition
     - git
     - noto-fonts
+    - pacman-contrib
     - pacutils
     - ripgrep
     - sudo
