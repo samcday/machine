@@ -3,11 +3,12 @@
   community.general.pacman:
     name:
     - base-devel
-    - sudo
+    - firefox-developer-edition
     - git
     - noto-fonts
-    - firefox-developer-edition
     - pacutils
+    - ripgrep
+    - sudo
 
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:
