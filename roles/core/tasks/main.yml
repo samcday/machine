@@ -45,3 +45,10 @@
   aur:
     name: yay
     state: present
+
+- name: install chezmoi
+  become: yes
+  become_user: aur_builder
+  aur:
+    name: chezmoi-git
+    state: present

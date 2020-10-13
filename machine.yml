@@ -1,7 +1,8 @@
 ---
 - hosts: localhost
   roles:
-    - core
+    - name: core
+      tags: [core]
     - zsh
     - sublime-text
     - systemd-homed
