@@ -9,6 +9,8 @@
   ansible.builtin.template:
     src: 99-wgchonk.netdev
     dest: /etc/systemd/network/99-wgchonk.netdev
+    mode: 0640
+    group: systemd-network
   notify: reload systemd-networkd
 
 
