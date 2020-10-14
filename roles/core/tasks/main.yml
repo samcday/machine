@@ -10,6 +10,7 @@
     - pacman-contrib
     - pacutils
     - ripgrep
+    - strace
     - sudo
 
 - name: wheel sudoers rule
@@ -28,6 +29,12 @@
   ansible.builtin.copy:
     content: 'LANG=en_US.UTF-8'
     dest: /etc/locale.conf
+
+- name: set timezone
+  ansible.builtin.file:
+    src: /usr/share/zoneinfo/Europe/Berlin
+    dest: /etc/localtime
+    state: link
 
 - name: create aur_builder user
   user:
