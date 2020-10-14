@@ -12,6 +12,7 @@
     - ripgrep
     - strace
     - sudo
+    - usbutils
 
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:
@@ -40,6 +41,7 @@
   user:
     name: aur_builder
     group: wheel
+
 - name: setup aur_builder sudo perms
   lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
