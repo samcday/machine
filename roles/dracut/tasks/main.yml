@@ -1,0 +1,15 @@
+---
+- name: install dracut
+  community.general.pacman: name=dracut
+
+- name: configure dracut
+  ansible.builtin.copy:
+    src: dracut.conf
+    dest: /etc/dracut.conf.d/sam.conf
+
+- name: install dracut-hook
+  become: yes
+  become_user: aur_builder
+  aur:
+    name: dracut-hook-uefi
+    state: present
