@@ -5,6 +5,8 @@
       tags: [core]
     - zsh
     - sublime-text
+    - name: systemd-networkd
+      tags: [network]
     - systemd-homed
     - i3-desktop
     - sshd

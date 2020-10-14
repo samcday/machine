@@ -5,6 +5,19 @@
     dest: /etc/systemd/network/20-wired.network
   notify: reload systemd-networkd
 
+- name: setup chonk wireguard interface
+  ansible.builtin.template:
+    src: 99-wgchonk.netdev
+    dest: /etc/systemd/network/99-wgchonk.netdev
+  notify: reload systemd-networkd
+
+
+- name: setup chonk wireguard config
+  ansible.builtin.copy:
+    src: 99-wgchonk.network
+    dest: /etc/systemd/network/99-wgchonk.network
+  notify: reload systemd-networkd
+
 - name: ensure systemd-networkd is running + enabled.
   ansible.builtin.systemd:
     name: systemd-networkd.service

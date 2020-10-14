@@ -1,0 +1,14 @@
+[NetDev]
+Name=wgchonk
+Kind=wireguard
+Description=WireGuard tunnel wgchonk
+
+[WireGuard]
+ListenPort=51820
+PrivateKey={{ wireguard_privatekey }}
+
+[WireGuardPeer]
+PublicKey=J3xqcznuLzDPphBvJVWHDJ3FNCPO8ac11gkc88f+9hM=
+PresharedKey={{ wireguard_chonk_psk }}
+AllowedIPs=192.168.250.1/32
+Endpoint=chonk.samcday.com:51820
