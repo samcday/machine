@@ -36,3 +36,8 @@
     src: /usr/share/zoneinfo/Europe/Berlin
     dest: /etc/localtime
     state: link
+
+- name: blacklist watchdog kernel module
+  ansible.builtin.copy:
+    content: 'blacklist sp5100_tco'
+    dest: /etc/modprobe.d/sp5100_tco.conf
