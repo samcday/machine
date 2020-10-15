@@ -3,6 +3,8 @@
   roles:
     - name: core
       tags: [core]
+    - name: aur
+      tags: [aur]
     - zsh
     - sublime-text
     - name: systemd-networkd
