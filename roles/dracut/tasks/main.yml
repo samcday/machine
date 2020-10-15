@@ -13,10 +13,3 @@
   aur:
     name: dracut-hook-uefi
     state: present
-
-- name: install plymouth
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: plymouth
-    state: present
