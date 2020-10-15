@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
     - base-devel
+    - efibootmgr
     - firefox-developer-edition
     - git
     - multipath-tools
