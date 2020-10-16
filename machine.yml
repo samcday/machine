@@ -12,7 +12,8 @@
     - name: aur
       tags: [aur]
     - zsh
-    - sublime-text
+    - name: sublime-text
+      tags: [sublime]
     - systemd-homed
     - name: systemd-networkd
       tags: [network]
