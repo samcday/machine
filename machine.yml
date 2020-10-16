@@ -12,6 +12,8 @@
     - systemd-homed
     - name: sway-desktop
       tags: [desktop]
+    - name: snap
+      tags: [snap]
     - sshd
     - name: boot
       tags: [boot]

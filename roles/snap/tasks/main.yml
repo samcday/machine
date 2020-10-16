@@ -1,0 +1,13 @@
+---
+- name: install snapd
+  become: yes
+  become_user: aur_builder
+  aur:
+    name: snapd
+    state: present
+
+- name: enable snapd.socket
+  ansible.builtin.systemd:
+    name: snapd.socket
+    enabled: yes
+    state: started
