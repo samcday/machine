@@ -1,0 +1,5 @@
+---
+kernel_cmdline: >-
+  root=/dev/vg0/arch
+  audit=0
+  rw
