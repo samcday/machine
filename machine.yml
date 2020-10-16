@@ -25,3 +25,5 @@
     - sshd
     - name: boot
       tags: [boot]
+    - name: 1password
+      tags: [1password]

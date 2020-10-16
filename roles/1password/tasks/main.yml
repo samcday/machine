@@ -1,0 +1,13 @@
+---
+- block:
+  - name: import 1password gpg key
+    shell:
+      cmd: gpg --import
+      stdin: '{{ onepassword_gpg_key }}'
+
+  - name: install 1password-cli
+    aur:
+      name: 1password-cli
+      state: present
+  become: yes
+  become_user: aur_builder
