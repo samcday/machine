@@ -1,6 +1,13 @@
 ---
-- name: install dracut
-  community.general.pacman: name=dracut
+- name: install packages
+  community.general.pacman:
+    name:
+    - clevis
+    - dracut
+    - libpwquality
+    - luksmeta
+    - nmap
+    - tpm2-tools
 
 - name: configure dracut
   ansible.builtin.copy:
