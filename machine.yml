@@ -12,5 +12,5 @@
     - systemd-homed
     - i3-desktop
     - sshd
-    - name: dracut
-      tags: [dracut]
+    - name: boot
+      tags: [boot]
