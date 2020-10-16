@@ -14,7 +14,6 @@
     - zsh
     - name: sublime-text
       tags: [sublime]
-    - systemd-homed
     - name: systemd-networkd
       tags: [network]
     - name: systemd-homed
