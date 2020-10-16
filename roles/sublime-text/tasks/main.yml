@@ -12,7 +12,7 @@
 
 - name: install sublime gpg key
   shell:
-    cmd: pacman-key -a
+    cmd: pacman-key -a -
     stdin: '{{ sublime_gpg_key }}'
 
 - name: trust sublime gpg key
