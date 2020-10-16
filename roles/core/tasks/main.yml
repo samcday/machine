@@ -4,6 +4,7 @@
     name:
     - base-devel
     - efibootmgr
+    - element-desktop
     - firefox-developer-edition
     - git
     - multipath-tools
