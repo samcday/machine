@@ -1,5 +1,11 @@
 ---
 - hosts: localhost
+  tasks:
+  - ansible.builtin.include_vars:
+      file: "{{ ansible_facts['hostname'] }}.yml"
+    tags: [always]
+
+- hosts: localhost
   roles:
     - name: core
       tags: [core]
