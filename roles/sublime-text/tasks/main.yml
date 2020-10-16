@@ -17,7 +17,7 @@
 
 - name: install sublime gpg key
   shell:
-    cmd: pacman-key -a && pacman-key --lsign-key 8A8F901A
+    cmd: pacman-key -a - && pacman-key --lsign-key 8A8F901A
     stdin: '{{ sublime_gpg_key }}'
   when: packeycheck.stdout.find('8A8F901A') == -1
 
