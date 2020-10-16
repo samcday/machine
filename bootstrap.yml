@@ -1,6 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - systemd-homed
-    - systemd-networkd
-    - core

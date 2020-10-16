@@ -21,5 +21,5 @@ genfstab -U / | grep '/home\s' | sudo tee -a /mnt/etc/fstab
 
 # ~ Boot into new root. ~
 
-ansible-playbook --become bootstrap.yml --ask-vault-pass
+ansible-playbook --become machine.yml
 ```

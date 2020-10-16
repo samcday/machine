@@ -7,6 +7,7 @@
       tags: [aur]
     - zsh
     - sublime-text
+    - systemd-homed
     - name: systemd-networkd
       tags: [network]
     - systemd-homed
