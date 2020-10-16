@@ -1,0 +1,14 @@
+---
+- name: install packages
+  community.general.pacman:
+    name:
+    - gdm
+    - sway
+    - swayidle
+    - swaylock
+    - xorg-server-xwayland
+
+- name: enable gdm
+  ansible.builtin.systemd:
+    name: gdm.service
+    enabled: yes

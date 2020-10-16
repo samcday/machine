@@ -10,7 +10,8 @@
     - name: systemd-networkd
       tags: [network]
     - systemd-homed
-    - i3-desktop
+    - name: sway-desktop
+      tags: [desktop]
     - sshd
     - name: boot
       tags: [boot]
