@@ -16,7 +16,8 @@
     - systemd-homed
     - name: systemd-networkd
       tags: [network]
-    - systemd-homed
+    - name: systemd-homed
+      when: ansible_facts['hostname'] == 'sam-desktop'
     - name: sway-desktop
       tags: [desktop]
     - name: snap

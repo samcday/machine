@@ -10,7 +10,7 @@
     - tpm2-tools
 
 - name: configure dracut
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: dracut.conf
     dest: /etc/dracut.conf.d/sam.conf
 
