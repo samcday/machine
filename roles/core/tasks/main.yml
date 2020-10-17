@@ -14,7 +14,9 @@
     - noto-fonts
     - pacman-contrib
     - pacutils
+    - pulsemixer
     - ripgrep
+    - spotifyd
     - strace
     - sudo
     - usbutils
