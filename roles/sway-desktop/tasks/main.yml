@@ -5,9 +5,15 @@
     - otf-font-awesome # for waybar
     - sway
     - swayidle
-    - swaylock
     - waybar
     - xorg-server-xwayland
+
+- name: install swaylock-effects
+  become: yes
+  become_user: aur_builder
+  aur:
+    name: swaylock-effects
+    state: present
 
 - ansible.builtin.file:
     path: /etc/systemd/system/getty@tty1.service.d/
