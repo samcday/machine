@@ -2,13 +2,23 @@
 - name: install packages
   community.general.pacman:
     name:
-    - gdm
     - sway
     - swayidle
     - swaylock
+    - waybar
     - xorg-server-xwayland
 
-- name: enable gdm
-  ansible.builtin.systemd:
-    name: gdm.service
-    enabled: yes
+- ansible.builtin.file:
+    path: /etc/systemd/system/getty@tty1.service.d/
+    state: directory
+
+- name: install files
+  ansible.builtin.copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+  - {src: sway-session.target, dest: /etc/systemd/user/sway-session.target}
+  - {src: swayidle.service, dest: /etc/systemd/user/swayidle.service}
+  - {src: sway-systemd.conf, dest: /etc/sway/config.d/90-systemd.conf}
+  - {src: waybar.conf, dest: /etc/sway/config.d/10-waybar.conf}
+  - {src: autologin.conf, dest: /etc/systemd/system/getty@tty1.service.d/autologin.conf}
