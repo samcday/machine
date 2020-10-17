@@ -2,6 +2,7 @@
 - name: install packages
   community.general.pacman:
     name:
+    - otf-font-awesome # for waybar
     - sway
     - swayidle
     - swaylock
