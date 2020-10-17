@@ -8,6 +8,7 @@
     - element-desktop
     - firefox-developer-edition
     - git
+    - man
     - multipath-tools
     - noto-fonts
     - pacman-contrib
