@@ -16,8 +16,6 @@
       tags: [sublime]
     - name: systemd-networkd
       tags: [network]
-    - name: systemd-homed
-      when: ansible_facts['hostname'] == 'sam-desktop'
     - name: sway-desktop
       tags: [desktop]
     - name: snap
