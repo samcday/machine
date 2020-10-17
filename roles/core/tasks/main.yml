@@ -23,6 +23,7 @@
     - strace
     - sudo
     - usbutils
+    - xdg-utils
 
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:
