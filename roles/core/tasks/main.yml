@@ -3,6 +3,7 @@
   community.general.pacman:
     name:
     - alacritty
+    - alsa-utils
     - base-devel
     - efibootmgr
     - element-desktop
