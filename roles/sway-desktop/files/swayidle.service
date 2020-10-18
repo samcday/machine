@@ -6,11 +6,9 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
-            lock 'swaylock -f -c 000000' \
-            timeout 60 'swaylock -f -c 000000' \
-            timeout 300 'swaymsg "output * dpms off"' \
-            resume 'swaymsg "output * dpms on"' \
-            before-sleep 'swaylock -f -c 000000'
+            lock 'swaylock -f' \
+            timeout 60 'swaylock -f' \
+            before-sleep 'swaylock -f'
 Restart=always
 RestartSec=1
 
