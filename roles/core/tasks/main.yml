@@ -4,6 +4,7 @@
     name:
     - alsa-utils
     - base-devel
+    - brightnessctl
     - ctags
     - efibootmgr
     - gammastep
