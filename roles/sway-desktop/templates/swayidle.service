@@ -6,9 +6,13 @@ PartOf=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
-            lock 'swaylock -f' \
-            timeout 300 'swaylock -f' \
-            before-sleep 'swaylock -f'
+  {% if (enable_dpms | default(true)) %}
+    timeout 300 'swaymsg "output * dpms off"' \
+      resume 'swaymsg "output * dpms on"' \
+  {% endif %}
+  lock 'swaylock -f' \
+  timeout 300 'swaylock -f' \
+  before-sleep 'swaylock -f'
 Restart=always
 RestartSec=1
 

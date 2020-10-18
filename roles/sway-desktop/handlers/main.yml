@@ -1,0 +1,12 @@
+---
+- name: reload user service manager
+  become: yes
+  become_user: sam
+  command:
+    cmd: systemctl --user daemon-reload
+
+- name: restart swayidle.service
+  become: yes
+  become_user: sam
+  command:
+    cmd: systemctl --user restart swayidle.service
