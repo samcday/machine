@@ -10,6 +10,8 @@
   community.general.pacman:
     name:
     - alacritty
+    - bemenu
+    - bemenu-wlroots
     - firefox-developer-edition
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - otf-font-awesome # for waybar
