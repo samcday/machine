@@ -6,6 +6,15 @@
     name: gtk-layer-shell-git
     state: present
 
+# Needed for unreleased merge from back in March:
+# https://github.com/swaywm/swayidle/pull/63/files
+- name: install swayidle-git
+  become: yes
+  become_user: aur_builder
+  aur:
+    name: swayidle-git
+    state: present
+
 - name: install packages
   community.general.pacman:
     name:
@@ -16,7 +25,6 @@
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - otf-font-awesome # for waybar
     - sway
-    - swayidle
     - waybar
 
 - name: install swaylock-effects
