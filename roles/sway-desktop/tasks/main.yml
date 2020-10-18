@@ -1,4 +1,11 @@
 ---
+- name: install gtk-layer-shell-git
+  become: yes
+  become_user: aur_builder
+  aur:
+    name: gtk-layer-shell-git
+    state: present
+
 - name: install packages
   community.general.pacman:
     name:
