@@ -4,7 +4,6 @@
     name:
     - alacritty
     - firefox-developer-edition
-    - fractal
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - otf-font-awesome # for waybar
     - sway
