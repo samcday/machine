@@ -52,3 +52,14 @@
   ansible.builtin.copy:
     content: 'blacklist sp5100_tco'
     dest: /etc/modprobe.d/sp5100_tco.conf
+
+- name: quieten rtkit-daemon logging
+  ansible.builtin.copy:
+    src: quiet-rtkit-daemon-logging.conf
+    dest: /etc/systemd/system/rtkit-daemon.service.d/
+
+- name: disable systemd-homed PAM modules
+  ansible.builtin.replace:
+    path: /etc/pam.d/system-auth
+    regexp: '^(?!#)(.*pam_systemd_home.so)'
+    replace: '#\1'
