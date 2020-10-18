@@ -6,6 +6,7 @@
     - base-devel
     - efibootmgr
     - git
+    - htop
     - jq
     - man
     - multipath-tools
