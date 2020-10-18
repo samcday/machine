@@ -10,6 +10,7 @@
     - firefox-developer-edition
     - git
     - jq
+    - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - man
     - multipath-tools
     - noto-fonts
