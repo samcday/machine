@@ -2,11 +2,14 @@
 - name: install packages
   community.general.pacman:
     name:
+    - alacritty
+    - firefox-developer-edition
+    - fractal
+    - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - otf-font-awesome # for waybar
     - sway
     - swayidle
     - waybar
-    - xorg-server-xwayland
 
 - name: install swaylock-effects
   become: yes

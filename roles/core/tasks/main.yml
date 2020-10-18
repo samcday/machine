@@ -2,15 +2,11 @@
 - name: install some core packages
   community.general.pacman:
     name:
-    - alacritty
     - alsa-utils
     - base-devel
     - efibootmgr
-    - element-desktop
-    - firefox-developer-edition
     - git
     - jq
-    - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - man
     - multipath-tools
     - noto-fonts
