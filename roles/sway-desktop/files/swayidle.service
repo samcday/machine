@@ -7,7 +7,7 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
             lock 'swaylock -f' \
-            timeout 60 'swaylock -f' \
+            timeout 300 'swaylock -f' \
             before-sleep 'swaylock -f'
 Restart=always
 RestartSec=1
