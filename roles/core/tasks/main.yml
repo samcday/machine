@@ -70,3 +70,15 @@
     regexp: '^(session.*pam_unix\.so)$'
     backrefs: yes
     line: '\1 quiet'
+
+- name: setup /var/log/sudo.log
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: 'Defaults logfile=/var/log/sudo.log'
+    validate: /usr/bin/visudo -cf %s
+
+- name: remove "good" sudo events from syslog
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: 'Defaults syslog_goodpri=none'
+    validate: /usr/bin/visudo -cf %s
