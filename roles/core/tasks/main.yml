@@ -63,3 +63,10 @@
     path: /etc/pam.d/system-auth
     regexp: '^(?!#)(.*pam_systemd_home.so)'
     replace: '#\1'
+
+- name: quieten pam_unix logging
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/system-auth
+    regexp: '^(session.*pam_unix\.so)$'
+    backrefs: yes
+    line: '\1 quiet'
