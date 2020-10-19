@@ -4,6 +4,7 @@
     name:
     - alsa-utils
     - base-devel
+    - bluez-utils
     - efibootmgr
     - gammastep
     - git
@@ -83,3 +84,8 @@
     path: /etc/sudoers
     line: 'Defaults syslog_goodpri=none'
     validate: /usr/bin/visudo -cf %s
+
+- name: enable bluetooth.service
+  ansible.builtin.systemd:
+    name: bluetooth.service
+    enabled: yes
