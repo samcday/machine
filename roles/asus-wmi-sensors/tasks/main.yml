@@ -1,0 +1,8 @@
+---
+- name: install asus-wmi-sensors-dkms-git
+  become: yes
+  become_user: aur_builder
+  aur: name=asus-wmi-sensors-dkms-git
+
+- name: load asus_wmi_sensors kernel module
+  community.general.modprobe: name=asus_wmi_sensors

@@ -11,6 +11,9 @@
       tags: [core]
     - name: aur
       tags: [aur]
+    - name: asus-wmi-sensors
+      tags: [asus]
+      when: ansible_facts['hostname'] == 'sam-desktop'
     - name: bluetooth
       tags: [bluetooth]
     - zsh
