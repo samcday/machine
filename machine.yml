@@ -11,6 +11,8 @@
       tags: [core]
     - name: aur
       tags: [aur]
+    - name: bluetooth
+      tags: [bluetooth]
     - zsh
     - name: sublime-text
       tags: [sublime]

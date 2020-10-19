@@ -1,0 +1,36 @@
+---
+- name: install bluetooth packages
+  community.general.pacman:
+    name:
+    - bluez-utils
+    - pulseaudio-bluetooth
+
+- name: enable bluetooth.service
+  ansible.builtin.systemd:
+    name: bluetooth.service
+    enabled: yes
+
+- name: set bluetooth adapter name
+  ansible.builtin.lineinfile:
+    path: /etc/bluetooth/main.conf
+    regexp: Name\s*=
+    line: Name = {{ ansible_facts['hostname'] }}
+    insertafter: ^\[General\]$
+  notify: restart bluetooth.service
+
+- name: turn bluetooth radio on at boot
+  ansible.builtin.lineinfile:
+    path: /etc/bluetooth/main.conf
+    regexp: AutoEnable\s*=
+    line: AutoEnable = true
+    insertafter: ^\[Policy\]$
+  notify: restart bluetooth.service
+
+- name: enable bluetooth fast connect
+  ansible.builtin.lineinfile:
+    path: /etc/bluetooth/main.conf
+    regexp: FastConnectable\s*=
+    line: FastConnectable = true
+    insertafter: ^\[General\]$
+  notify: restart bluetooth.service
+  when: ansible_facts['hostname'] == 'sam-desktop'
