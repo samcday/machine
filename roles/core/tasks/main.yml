@@ -4,6 +4,7 @@
     name:
     - alsa-utils
     - base-devel
+    - ctags
     - efibootmgr
     - gammastep
     - git
