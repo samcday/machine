@@ -83,3 +83,15 @@
   ansible.builtin.file:
     path: /usr/share/backgrounds/macOS/mojave.xml
     state: absent
+
+- name: import wob key
+  become: yes
+  become_user: aur_builder
+  shell:
+    cmd: curl 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x5c6da024dde27178073ea103f4b432d5d67990e3' | gpg --import
+    warn: false
+
+- name: install wob
+  become: yes
+  become_user: aur_builder
+  aur: name=wob
