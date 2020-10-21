@@ -24,6 +24,7 @@
     - firefox-developer-edition
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - otf-font-awesome # for waybar
+    - qt5-wayland
     - sway
     - waybar
 
