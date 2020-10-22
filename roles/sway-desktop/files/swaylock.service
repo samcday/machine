@@ -1,0 +1,4 @@
+[Service]
+ExecStart=swaylock
+ExecStartPre=dbus-send --print-reply --system --dest=org.freedesktop.login1 /org/freedesktop/login1/session/${XDG_SESSION_ID} org.freedesktop.login1.Session.SetLockedHint boolean:true
+ExecStopPost=dbus-send --print-reply --system --dest=org.freedesktop.login1 /org/freedesktop/login1/session/${XDG_SESSION_ID} org.freedesktop.login1.Session.SetLockedHint boolean:false

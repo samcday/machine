@@ -58,6 +58,7 @@
   - {src: waybar.conf, dest: /etc/sway/config.d/10-waybar.conf}
   - {src: autologin.conf, dest: /etc/systemd/system/getty@tty1.service.d/autologin.conf}
   - {src: minimal-waybar-config, dest: /etc/xdg/waybar/config}
+  - {src: swaylock.service, dest: /etc/systemd/user/swaylock.service}
 
 - name: install swayidle.service
   ansible.builtin.template:
