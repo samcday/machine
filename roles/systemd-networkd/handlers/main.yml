@@ -1,3 +1,7 @@
 ---
 - name: reload systemd-networkd
   shell: networkctl reload
+- name: restart systemd-resolved
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: restarted

@@ -31,3 +31,10 @@
     name: systemd-resolved.service
     state: started
     enabled: yes
+
+- name: make sure systemd-resolved mDNS is disabled.
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: 'MulticastDNS='
+    line: MulticastDNS=no
+  notify: restart systemd-resolved

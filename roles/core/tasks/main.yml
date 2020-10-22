@@ -88,3 +88,9 @@
     path: /etc/sudoers
     line: 'Defaults syslog_goodpri=none'
     validate: /usr/bin/visudo -cf %s
+
+- name: enable avahi-daemon
+  ansible.builtin.systemd:
+    name: avahi-daemon.service
+    enabled: yes
+    state: started
