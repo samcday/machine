@@ -96,3 +96,8 @@
   become: yes
   become_user: aur_builder
   aur: name=wob
+
+- name: install ulauncher
+  become: yes
+  become_user: aur_builder
+  aur: name=ulauncher
