@@ -17,6 +17,7 @@
     - noto-fonts
     - pacman-contrib
     - pacutils
+    - pamixer
     - playerctl
     - pulseaudio
     - pulseaudio-alsa
