@@ -7,7 +7,7 @@ PartOf=graphical-session.target
 Type=simple
 ExecStart=/usr/bin/swayidle -w \
   {% if (enable_dpms | default(true)) %}
-    timeout 300 'swaymsg "output * dpms off"' \
+    timeout 900 'swaymsg "output * dpms off"' \
       resume 'swaymsg "output * dpms on"' \
   {% endif %}
   lock 'systemctl --user start swaylock' \
