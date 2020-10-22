@@ -2,6 +2,7 @@
 - name: install bluetooth packages
   community.general.pacman:
     name:
+    - bluez
     - bluez-utils
     - pulseaudio-bluetooth
 
