@@ -101,3 +101,21 @@
   become: yes
   become_user: aur_builder
   aur: name=ulauncher
+
+- name: setup ulauncher dbus activation
+  ansible.builtin.copy:
+    content: |
+      [D-BUS Service]
+      Name=net.launchpad.ulauncher
+      SystemdService=ulauncher.service
+      Exec=/usr/bin/ulauncher
+    dest: /usr/share/dbus-1/services/net.launchpad.ulauncher.service
+- name: ulauncher systemd unit
+  ansible.builtin.copy:
+    content: |
+      [Service]
+      Type=dbus
+      BusName=net.launchpad.ulauncher
+      ExecStart=/usr/bin/ulauncher
+      ExecStartPost=busctl --user call net.launchpad.ulauncher /net/launchpad/ulauncher net.launchpad.ulauncher toggle_window
+    dest: /etc/systemd/user/ulauncher.service
