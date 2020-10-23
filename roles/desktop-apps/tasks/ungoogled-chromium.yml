@@ -14,5 +14,8 @@
       Server = https://repo.vin.ovh/arch/$arch
   notify: refresh pacman
 
+- name: Flush handlers
+  meta: flush_handlers
+
 - name: install ungoogled-chromium
   community.general.pacman: name=ungoogled-chromium
