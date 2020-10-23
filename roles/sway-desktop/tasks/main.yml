@@ -36,13 +36,6 @@
     name: swaylock-effects
     state: present
 
-- name: install jetbrains-toolbox
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: jetbrains-toolbox
-    state: present
-
 - ansible.builtin.file:
     path: /etc/systemd/system/getty@tty1.service.d/
     state: directory
@@ -118,20 +111,3 @@
       ExecStart=/usr/bin/ulauncher
       ExecStartPost=busctl --user call net.launchpad.ulauncher /net/launchpad/ulauncher net.launchpad.ulauncher toggle_window
     dest: /etc/systemd/user/ulauncher.service
-
-- name: trust totally trustworthy person on the internet # very legal, very cool
-  shell:
-    cmd: |
-      pacman-key --recv-keys 3DEA62513C8035383A245A12E5786B42E8E5D565 \
-      && pacman-key --lsign-key 3DEA62513C8035383A245A12E5786B42E8E5D565
-
-- name: add jk-aur repo to pacman.conf
-  ansible.builtin.blockinfile:
-    path: /etc/pacman.conf
-    block: |
-      [jk-aur]
-      Server = https://repo.vin.ovh/arch/$arch
-  notify: refresh pacman
-
-- name: install ungoogled-chromium
-  community.general.pacman: name=ungoogled-chromium

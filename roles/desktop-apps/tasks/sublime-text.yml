@@ -2,6 +2,7 @@
 - name: add sublime-text repo to pacman.conf
   ansible.builtin.blockinfile:
     path: /etc/pacman.conf
+    marker: "# {mark} sublime-text"
     block: |
       [sublime-text]
       Server = https://download.sublimetext.com/arch/stable/x86_64
