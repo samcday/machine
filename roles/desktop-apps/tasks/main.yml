@@ -2,3 +2,4 @@
 - import_tasks: jetbrains.yml
 - import_tasks: sublime-text.yml
 - import_tasks: ungoogled-chromium.yml
+- import_tasks: element.yml
