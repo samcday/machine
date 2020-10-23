@@ -60,23 +60,6 @@
   - reload user service manager
   - restart swayidle.service
 
-- ansible.builtin.file:
-    path: /usr/share/backgrounds/macOS
-    state: directory
-
-- name: install mojave dynamic wallpaper
-  ansible.builtin.unarchive:
-    remote_src: yes
-    src: https://github.com/japamax/gnome-kde-dynamic-wallpaper-mojave/tarball/master
-    dest: /usr/share/backgrounds/macOS
-    extra_opts: [--strip-components=1]
-    creates: /usr/share/backgrounds/macOS/mojave-timed.xml
-
-- name:
-  ansible.builtin.file:
-    path: /usr/share/backgrounds/macOS/mojave.xml
-    state: absent
-
 - name: import wob key
   become: yes
   become_user: aur_builder
