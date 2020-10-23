@@ -29,6 +29,7 @@
     - sshfs
     - strace
     - sudo
+    - unzip
     - usbutils
     - xdg-utils
 
