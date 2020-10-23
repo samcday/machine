@@ -21,7 +21,6 @@
     - alacritty
     - bemenu
     - bemenu-wlroots
-    - firefox-developer-edition
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - mako
     - otf-font-awesome # for waybar
@@ -119,3 +118,20 @@
       ExecStart=/usr/bin/ulauncher
       ExecStartPost=busctl --user call net.launchpad.ulauncher /net/launchpad/ulauncher net.launchpad.ulauncher toggle_window
     dest: /etc/systemd/user/ulauncher.service
+
+- name: trust totally trustworthy person on the internet # very legal, very cool
+  shell:
+    cmd: |
+      pacman-key --recv-keys 3DEA62513C8035383A245A12E5786B42E8E5D565 \
+      && pacman-key --lsign-key 3DEA62513C8035383A245A12E5786B42E8E5D565
+
+- name: add jk-aur repo to pacman.conf
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    block: |
+      [jk-aur]
+      Server = https://repo.vin.ovh/arch/$arch
+  notify: refresh pacman
+
+- name: install ungoogled-chromium
+  community.general.pacman: name=ungoogled-chromium

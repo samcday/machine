@@ -10,3 +10,7 @@
   become_user: sam
   command:
     cmd: systemctl --user restart swayidle.service
+
+- name: refresh pacman
+  community.general.pacman:
+    update_cache: yes

@@ -95,3 +95,9 @@
     name: avahi-daemon.service
     enabled: yes
     state: started
+
+- name: pretend GnuPG isn't dying a slow spasmic death
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.d/gnupg/gpg.conf
+    regexp: 'keyserver\s+'
+    line: 'keyserver hkps://keys.openpgp.org'
