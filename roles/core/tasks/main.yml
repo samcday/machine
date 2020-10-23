@@ -30,6 +30,7 @@
     - sshfs
     - strace
     - sudo
+    - syncthing
     - unzip
     - usbutils
     - watchman
@@ -104,3 +105,9 @@
     path: /etc/pacman.d/gnupg/gpg.conf
     regexp: 'keyserver\s+'
     line: 'keyserver hkp://keyserver.ubuntu.com'
+
+- name: enable+start syncthing@sam.service
+  ansible.builtin.systemd:
+    name: syncthing@sam.service
+    enabled: yes
+    state: started
