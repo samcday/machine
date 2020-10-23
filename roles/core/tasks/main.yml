@@ -32,6 +32,7 @@
     - sudo
     - unzip
     - usbutils
+    - watchman
     - xdg-utils
 
 - name: wheel sudoers rule
