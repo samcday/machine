@@ -32,6 +32,13 @@
     state: started
     enabled: yes
 
+- name: /etc/resolv.conf
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    force: yes
+    src: /run/systemd/resolve/stub-resolv.conf
+    state: link
+
 - name: make sure systemd-resolved mDNS is disabled.
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
