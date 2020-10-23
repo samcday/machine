@@ -101,4 +101,4 @@
   ansible.builtin.lineinfile:
     path: /etc/pacman.d/gnupg/gpg.conf
     regexp: 'keyserver\s+'
-    line: 'keyserver hkps://keys.openpgp.org'
+    line: 'keyserver hkp://keyserver.ubuntu.com'
