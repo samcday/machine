@@ -1,0 +1,20 @@
+---
+- name: restart grafana
+  ansible.builtin.systemd:
+    name: grafana
+    state: restarted
+
+- name: restart prometheus
+  ansible.builtin.systemd:
+    name: prometheus
+    state: restarted
+
+- name: reload prometheus
+  ansible.builtin.systemd:
+    name: prometheus
+    state: reloaded
+
+- name: restart prometheus-node-exporter
+  ansible.builtin.systemd:
+    name: prometheus-node-exporter
+    state: restarted

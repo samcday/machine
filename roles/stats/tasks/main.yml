@@ -1,0 +1,62 @@
+---
+- name: install packages
+  community.general.pacman:
+    name:
+    - grafana
+    - prometheus
+    - prometheus-node-exporter
+
+- name: bind grafana to localhost
+  ansible.builtin.lineinfile:
+    path: /etc/grafana.ini
+    regexp: ^#?\s*http_addr\s*=
+    insertafter: '\[server\]'
+    firstmatch: yes
+    line: http_addr = 127.0.0.1
+  notify: restart grafana
+
+- name: enable+start grafana
+  ansible.builtin.systemd:
+    name: grafana.service
+    enabled: yes
+    state: started
+
+- name: bind prometheus to localhost
+  ansible.builtin.lineinfile:
+    path: /etc/conf.d/prometheus
+    line: PROMETHEUS_ARGS+=" --web.listen-address=127.0.0.1:9090"
+  notify: restart prometheus
+
+- name: configure prometheus
+  ansible.builtin.copy:
+    src: prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+  notify: reload prometheus
+
+- name: enable+start prometheus
+  ansible.builtin.systemd:
+    name: prometheus.service
+    enabled: yes
+    state: started
+
+- name: bind prometheus-node-exporter to localhost
+  ansible.builtin.lineinfile:
+    path: /etc/conf.d/prometheus-node-exporter
+    line: NODE_EXPORTER_ARGS+=" --web-listen-address=127.0.0.1:9100"
+  notify: restart prometheus-node-exporter
+
+- name: enable extra prometheus-node-exporter collectors
+  ansible.builtin.lineinfile:
+    path: /etc/conf.d/prometheus-node-exporter
+    line: NODE_EXPORTER_ARGS+=" --collector.{{ item }}"
+  notify: restart prometheus-node-exporter
+  with_items:
+  - logind
+  - processes
+  - systemd
+
+- name: enable+start prometheus-node-exporter
+  ansible.builtin.systemd:
+    name: prometheus-node-exporter.service
+    enabled: yes
+    state: started
