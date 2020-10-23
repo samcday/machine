@@ -13,6 +13,7 @@
     - jq
     - jre-openjdk
     - man
+    - mercurial
     - multipath-tools
     - noto-fonts
     - pacman-contrib
