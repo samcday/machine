@@ -1,34 +1,30 @@
 ---
-- hosts: localhost
-  tasks:
-  - ansible.builtin.include_vars:
-      file: "{{ ansible_facts['hostname'] }}.yml"
-    tags: [always]
-
-- hosts: localhost
+- hosts: workstations
   roles:
-    - name: core
-      tags: [core]
-    - name: aur
-      tags: [aur]
-    - name: asus-wmi-sensors
-      tags: [asus]
-      when: ansible_facts['hostname'] == 'sam-desktop'
-    - name: bluetooth
-      tags: [bluetooth]
-    - zsh
-    - name: systemd-networkd
-      tags: [network]
-    - name: sway-desktop
-      tags: [desktop]
-    - name: desktop-apps
-      tags: [desktop, desktop-apps]
-    - name: snap
-      tags: [snap]
-    - sshd
-    - name: boot
-      tags: [boot]
-    - name: 1password
-      tags: [1password]
-    - name: stats
-      tags: [stats]
+  - name: core
+    tags: [core]
+  - name: aur
+    tags: [aur]
+  - name: bluetooth
+    tags: [bluetooth]
+  - zsh
+  - name: systemd-networkd
+    tags: [network]
+  - name: sway-desktop
+    tags: [desktop]
+  - name: desktop-apps
+    tags: [desktop, desktop-apps]
+  - name: snap
+    tags: [snap]
+  - sshd
+  - name: boot
+    tags: [boot]
+  - name: 1password
+    tags: [1password]
+  - name: stats
+    tags: [stats]
+
+- hosts: sam-desktop
+  roles:
+  - name: asus-wmi-sensors
+    tags: [asus]
