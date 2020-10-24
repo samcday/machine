@@ -22,9 +22,12 @@
     state: started
 
 - name: bind prometheus to localhost
-  ansible.builtin.lineinfile:
-    path: /etc/conf.d/prometheus
-    line: PROMETHEUS_ARGS+=" --web.listen-address=127.0.0.1:9090"
+  ansible.builtin.copy:
+    dest: /etc/conf.d/prometheus
+    content: >
+      PROMETHEUS_ARGS="
+      --web.listen-address=127.0.0.1:9090
+      "
   notify: restart prometheus
 
 - name: configure prometheus
@@ -39,21 +42,17 @@
     enabled: yes
     state: started
 
-- name: bind prometheus-node-exporter to localhost
-  ansible.builtin.lineinfile:
-    path: /etc/conf.d/prometheus-node-exporter
-    line: NODE_EXPORTER_ARGS+=" --web-listen-address=127.0.0.1:9100"
+- name: configure prometheus-node-exporter
+  ansible.builtin.copy:
+    dest: /etc/conf.d/prometheus-node-exporter
+    content: >
+      NODE_EXPORTER_ARGS="
+      --web.listen-address=127.0.0.1:9100
+      --collector.logind
+      --collector.processes
+      --collector.systemd
+      "
   notify: restart prometheus-node-exporter
-
-- name: enable extra prometheus-node-exporter collectors
-  ansible.builtin.lineinfile:
-    path: /etc/conf.d/prometheus-node-exporter
-    line: NODE_EXPORTER_ARGS+=" --collector.{{ item }}"
-  notify: restart prometheus-node-exporter
-  with_items:
-  - logind
-  - processes
-  - systemd
 
 - name: enable+start prometheus-node-exporter
   ansible.builtin.systemd:
