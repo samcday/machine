@@ -33,6 +33,7 @@
     - strace
     - sudo
     - syncthing
+    - tcpdump
     - ttf-jetbrains-mono
     - unzip
     - usbutils
