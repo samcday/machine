@@ -1,5 +1,5 @@
 ---
-- name: setup chonk wireguard interface
+- name: setup wgme
   block:
   - ansible.builtin.template:
       src: 99-wgme.netdev
@@ -8,9 +8,14 @@
       group: systemd-network
     notify:
     - reload systemd-networkd
-  - name: setup chonk wireguard config
-    ansible.builtin.template:
+  - ansible.builtin.template:
       src: 99-wgme.network
       dest: /etc/systemd/network/99-wgme.network
     notify:
     - reload systemd-networkd
+
+- name: generate .wgme host entries
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ hostvars[item].wgme.ip }} {{ item }}.wgme"
+  loop: "{{ groups['all'] }}"

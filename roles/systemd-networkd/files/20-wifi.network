@@ -3,6 +3,7 @@ Name=wlan0
 
 [Network]
 DHCP=yes
+MulticastDNS=yes
 
 [DHCP]
 UseDNS=no
