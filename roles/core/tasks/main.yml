@@ -37,6 +37,7 @@
     - unzip
     - usbutils
     - watchman
+    - wireguard-tools
     - xdg-utils
 
 - name: wheel sudoers rule
