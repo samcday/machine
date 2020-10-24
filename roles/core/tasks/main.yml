@@ -27,6 +27,7 @@
     - pulsemixer
     - ripgrep
     - rustup
+    - sccache
     - spotifyd
     - sshfs
     - strace
