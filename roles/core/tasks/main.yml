@@ -5,6 +5,7 @@
     - alsa-utils
     - base-devel
     - brightnessctl
+    - chrony
     - ctags
     - efibootmgr
     - gammastep
@@ -109,5 +110,11 @@
 - name: enable+start syncthing@sam.service
   ansible.builtin.systemd:
     name: syncthing@sam.service
+    enabled: yes
+    state: started
+
+- name: enable+start chrony
+  ansible.builtin.systemd:
+    name: chronyd.service
     enabled: yes
     state: started
