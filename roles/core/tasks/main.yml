@@ -99,12 +99,6 @@
     line: 'Defaults syslog_goodpri=none'
     validate: /usr/bin/visudo -cf %s
 
-- name: enable avahi-daemon
-  ansible.builtin.systemd:
-    name: avahi-daemon.service
-    enabled: yes
-    state: started
-
 - name: pretend GnuPG isn't dying a slow spasmic death
   ansible.builtin.lineinfile:
     path: /etc/pacman.d/gnupg/gpg.conf

@@ -10,6 +10,8 @@
   - zsh
   - name: systemd-networkd
     tags: [network]
+  - name: wireguard
+    tags: [network, wireguard]
   - name: sway-desktop
     tags: [desktop]
   - name: desktop-apps

@@ -1,0 +1,16 @@
+---
+- name: setup chonk wireguard interface
+  block:
+  - ansible.builtin.template:
+      src: 99-wgme.netdev
+      dest: /etc/systemd/network/99-wgme.netdev
+      mode: 0640
+      group: systemd-network
+    notify:
+    - reload systemd-networkd
+  - name: setup chonk wireguard config
+    ansible.builtin.template:
+      src: 99-wgme.network
+      dest: /etc/systemd/network/99-wgme.network
+    notify:
+    - reload systemd-networkd

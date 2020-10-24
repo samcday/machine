@@ -6,22 +6,8 @@
   with_items:
   - wired
   - wifi
-  notify: reload systemd-networkd
-
-- name: setup chonk wireguard interface
-  block:
-  - ansible.builtin.template:
-      src: 99-wgchonk.netdev
-      dest: /etc/systemd/network/99-wgchonk.netdev
-      mode: 0640
-      group: systemd-network
-    notify: reload systemd-networkd
-  - name: setup chonk wireguard config
-    ansible.builtin.copy:
-      src: 99-wgchonk.network
-      dest: /etc/systemd/network/99-wgchonk.network
-    notify: reload systemd-networkd
-  when: ansible_facts['hostname'] == 'sam-desktop'
+  notify:
+  - reload systemd-networkd
 
 - name: ensure systemd-networkd is running + enabled.
   ansible.builtin.systemd:
@@ -42,11 +28,27 @@
     src: /run/systemd/resolve/stub-resolv.conf
     state: link
 
-- name: make sure systemd-resolved mDNS is disabled.
+- name: make sure avahi is not running
+  ansible.builtin.systemd:
+    name: '{{ item }}'
+    enabled: no
+    state: stopped
+  with_items:
+  - avahi-daemon.service
+  - avahi-daemon.socket
+
+- name: make sure systemd-resolved mDNS is enabled.
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
-    regexp: 'MulticastDNS='
-    line: MulticastDNS=no
+    regexp: MulticastDNS=
+    line: MulticastDNS=yes
+  notify: restart systemd-resolved
+
+- name: configure search domains
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: Domains=
+    line: Domains=local vpn
   notify: restart systemd-resolved
 
 - name: enable DNSoTLS
@@ -59,6 +61,6 @@
 - name: 1.1.1.1 DNS
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
-    regexp: 'DNS='
+    regexp: '^#?\s*DNS='
     line: DNS=1.1.1.1 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
   notify: restart systemd-resolved

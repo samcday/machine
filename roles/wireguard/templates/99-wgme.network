@@ -1,0 +1,5 @@
+[Match]
+Name=wgme
+
+[Network]
+Address={{ wgme.ip }}/24

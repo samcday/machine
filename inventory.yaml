@@ -4,3 +4,6 @@ all:
       hosts:
         sam-macbook:
         sam-desktop:
+    servers:
+      hosts:
+        chonk.samcday.com:

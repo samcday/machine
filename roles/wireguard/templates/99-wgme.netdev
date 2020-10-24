@@ -1,0 +1,19 @@
+[NetDev]
+Name=wgme
+Kind=wireguard
+Description=wgme
+
+[WireGuard]
+ListenPort=51820
+PrivateKey={{ wgme.prv }}
+
+{% for host in groups['all'] %}
+{%- if hostvars[host].wgme.pub is defined and inventory_hostname != host %}
+[WireGuardPeer]
+PublicKey={{ hostvars[host].wgme.pub }}
+PresharedKey={{ wireguard_psk -}}
+AllowedIPs={{ hostvars[host].wgme.ip }}/32
+Endpoint={{ host }}:51820
+{% endif %}
+
+{% endfor %}
