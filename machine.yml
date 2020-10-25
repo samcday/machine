@@ -5,6 +5,7 @@
     tags: [core]
   - name: aur
     tags: [aur]
+  - sshd
   - name: wireguard
     tags: [network, wireguard]
 
@@ -25,7 +26,6 @@
     tags: [desktop, desktop-apps]
   - name: snap
     tags: [snap]
-  - sshd
   - name: boot
     tags: [boot]
   - name: 1password
