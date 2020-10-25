@@ -2,7 +2,8 @@
 Name=enp4s0
 
 [Network]
-DHCP=yes
+DHCP=ipv4
+LinkLocalAddressing=ipv4
 MulticastDNS=yes
 
 [DHCP]
