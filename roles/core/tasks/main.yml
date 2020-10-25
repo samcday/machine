@@ -2,45 +2,27 @@
 - name: install some core packages
   community.general.pacman:
     name:
-    - alsa-utils
     - base-devel
-    - brightnessctl
     - chrony
     - ctags
     - efibootmgr
-    - gammastep
     - git
     - htop
     - jq
     - jre-openjdk
     - man
     - mercurial
-    - multipath-tools
-    - noto-fonts
-    - noto-fonts-emoji
     - pacman-contrib
     - pacutils
-    - pamixer
-    - playerctl
-    - pulseaudio
-    - pulseaudio-alsa
-    - pulseaudio-zeroconf
-    - pulsemixer
     - ripgrep
     - rustup
     - sccache
-    - spotifyd
     - sshfs
     - strace
     - sudo
-    - syncthing
     - tcpdump
-    - ttf-jetbrains-mono
     - unzip
-    - usbutils
-    - watchman
     - wireguard-tools
-    - xdg-utils
 
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:
@@ -65,52 +47,22 @@
     dest: /etc/localtime
     state: link
 
-- name: blacklist watchdog kernel module
-  ansible.builtin.copy:
-    content: 'blacklist sp5100_tco'
-    dest: /etc/modprobe.d/sp5100_tco.conf
-
-- name: quieten rtkit-daemon logging
-  ansible.builtin.copy:
-    src: quiet-rtkit-daemon-logging.conf
-    dest: /etc/systemd/system/rtkit-daemon.service.d/
-
 - name: disable systemd-homed PAM modules
   ansible.builtin.replace:
     path: /etc/pam.d/system-auth
     regexp: '^(?!#)(.*pam_systemd_home.so)'
     replace: '#\1'
 
-- name: quieten pam_unix logging
-  ansible.builtin.lineinfile:
-    path: /etc/pam.d/system-auth
-    regexp: '^(session.*pam_unix\.so)$'
-    backrefs: yes
-    line: '\1 quiet'
-
-- name: setup /var/log/sudo.log
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers
-    line: 'Defaults logfile=/var/log/sudo.log'
-    validate: /usr/bin/visudo -cf %s
-
-- name: remove "good" sudo events from syslog
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers
-    line: 'Defaults syslog_goodpri=none'
-    validate: /usr/bin/visudo -cf %s
+- name: init pacman-key
+  shell:
+    cmd: pacman-key --init && pacman-key --populate
+    creates: /etc/pacman.d/gnupg
 
 - name: pretend GnuPG isn't dying a slow spasmic death
   ansible.builtin.lineinfile:
     path: /etc/pacman.d/gnupg/gpg.conf
     regexp: 'keyserver\s+'
     line: 'keyserver hkp://keyserver.ubuntu.com'
-
-- name: enable+start syncthing@sam.service
-  ansible.builtin.systemd:
-    name: syncthing@sam.service
-    enabled: yes
-    state: started
 
 - name: enable+start chrony
   ansible.builtin.systemd:

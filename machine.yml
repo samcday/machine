@@ -1,15 +1,24 @@
 ---
-- hosts: workstations
+- hosts: all
   roles:
   - name: core
     tags: [core]
   - name: aur
     tags: [aur]
+  - name: wireguard
+    tags: [network, wireguard]
+
+- hosts: workstations
+  roles:
+  - name: core
+    tags: [core]
   - name: bluetooth
     tags: [bluetooth]
   - zsh
   - name: systemd-networkd
     tags: [network]
+  - name: desktop-core
+    tags: [desktop]
   - name: sway-desktop
     tags: [desktop]
   - name: desktop-apps
@@ -24,12 +33,12 @@
   - name: stats
     tags: [stats]
 
-- hosts: all
-  roles:
-  - name: wireguard
-    tags: [network, wireguard]
-
 - hosts: sam-desktop
+  tasks:
+  - name: blacklist watchdog kernel module
+    ansible.builtin.copy:
+      content: 'blacklist sp5100_tco'
+      dest: /etc/modprobe.d/sp5100_tco.conf
   roles:
   - name: asus-wmi-sensors
     tags: [asus]
