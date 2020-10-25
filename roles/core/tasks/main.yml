@@ -17,6 +17,7 @@
     - mercurial
     - multipath-tools
     - noto-fonts
+    - noto-fonts-emoji
     - pacman-contrib
     - pacutils
     - pamixer
