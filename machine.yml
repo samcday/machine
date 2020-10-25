@@ -10,8 +10,6 @@
   - zsh
   - name: systemd-networkd
     tags: [network]
-  - name: wireguard
-    tags: [network, wireguard]
   - name: sway-desktop
     tags: [desktop]
   - name: desktop-apps
@@ -25,6 +23,11 @@
     tags: [1password]
   - name: stats
     tags: [stats]
+
+- hosts: all
+  roles:
+  - name: wireguard
+    tags: [network, wireguard]
 
 - hosts: sam-desktop
   roles:
