@@ -42,3 +42,8 @@
   roles:
   - name: asus-wmi-sensors
     tags: [asus]
+
+- hosts: chonk.samcday.com
+  roles:
+  - name: matrix-homeserver
+    tags: [matrix, homeserver]

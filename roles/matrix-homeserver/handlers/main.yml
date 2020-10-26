@@ -1,0 +1,13 @@
+---
+- name: reload caddy
+  ansible.builtin.systemd:
+    name: caddy.service
+    state: reloaded
+
+- name: reload systemd
+  shell: systemctl daemon-reload
+
+- name: restart synapse
+  ansible.builtin.systemd:
+    name: synapse.service
+    state: restarted

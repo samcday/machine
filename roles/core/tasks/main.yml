@@ -76,6 +76,17 @@
   become: yes
   aur: name=caddy2
 
+- name: fix broken default Caddyfile
+  ansible.builtin.lineinfile:
+    path: /etc/caddy/Caddyfile
+    regexp: '\:80'
+    state: absent
+- name: fix broken default Caddyfile
+  ansible.builtin.lineinfile:
+    path: /etc/caddy/Caddyfile
+    regexp: 'root \*'
+    state: absent
+
 - name: ensure Caddy is running+enabled
   ansible.builtin.systemd:
     name: caddy.service

@@ -1,0 +1,48 @@
+---
+- name: install packages
+  community.general.pacman:
+    name:
+    - matrix-synapse
+    - python-lxml
+    - python-netaddr
+
+- ansible.builtin.file:
+    path: /etc/systemd/system/synapse.service.d/
+    state: directory
+
+- name: configure synapse
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: /etc/synapse/{{ item }}
+  with_items: [homeserver.yaml, log.yaml]
+  notify: restart synapse
+
+- name: start+enable synapse
+  ansible.builtin.systemd:
+    name: synapse
+    state: started
+    enabled: yes
+
+- name: import Caddy signing key
+  become_user: aur_builder
+  become: yes
+  shell: gpg --receive-keys 29D0817A67156E4F25DC24782A349DD577D586A5
+
+- name: install packages
+  become_user: aur_builder
+  become: yes
+  aur: name={{ item }}
+  with_items: [mautrix-signal-git, mautrix-whatsapp]
+
+- name: configure Caddy
+  ansible.builtin.copy:
+    dest: /etc/caddy/conf.d/matrix.conf
+    content: |
+      matrix.samcday.com:443 {
+        reverse_proxy /_matrix/* http://localhost:8008
+      }
+
+      matrix.samcday.com:8448 {
+        reverse_proxy http://localhost:8008
+      }
+  notify: reload caddy
