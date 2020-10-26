@@ -1,0 +1,64 @@
+server_name: samcday.com
+pid_file: "/var/run/synapse.pid"
+public_baseurl: https://matrix.samcday.com
+use_presence: true
+
+listeners:
+- port: 8008
+  tls: false
+  type: http
+  x_forwarded: true
+  bind_addresses: ['::1', '127.0.0.1']
+
+  resources:
+  - names: [client, federation]
+    compress: false
+
+admin_contact: 'mailto:me@samcday.com'
+federation_ip_range_blacklist:
+- '127.0.0.0/8'
+- '10.0.0.0/8'
+- '172.16.0.0/12'
+- '192.168.0.0/16'
+- '100.64.0.0/10'
+- '169.254.0.0/16'
+- '::1/128'
+- 'fe80::/64'
+- 'fc00::/7'
+
+database:
+  name: sqlite3
+  args:
+    database: /var/lib/synapse/homeserver.db
+
+log_config: "/etc/synapse/log.yaml"
+
+
+media_store_path: "/var/lib/synapse/media"
+url_preview_enabled: true
+url_preview_ip_range_blacklist:
+- '127.0.0.0/8'
+- '10.0.0.0/8'
+- '172.16.0.0/12'
+- '192.168.0.0/16'
+- '100.64.0.0/10'
+- '169.254.0.0/16'
+- '::1/128'
+- 'fe80::/64'
+- 'fc00::/7'
+
+registration_shared_secret: {{ synapse_shared_secret }}
+
+enable_metrics: true
+metrics_flags:
+  known_servers: true
+report_stats: true
+
+app_service_config_files:
+# - /opt/mautrix-telegram/registration.yaml
+# - /etc/mautrix-whatsapp-registration.yaml
+# - /opt/matrix-puppet-signal/signal-registration.yaml
+
+signing_key_path: "/etc/synapse/homeserver.signing.key"
+trusted_key_servers:
+- server_name: "matrix.org"

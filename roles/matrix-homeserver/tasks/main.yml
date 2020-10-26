@@ -11,7 +11,7 @@
     state: directory
 
 - name: configure synapse
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: '{{ item }}'
     dest: /etc/synapse/{{ item }}
   with_items: [homeserver.yaml, log.yaml]
