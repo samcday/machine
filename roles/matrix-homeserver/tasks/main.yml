@@ -6,34 +6,43 @@
     - python-lxml
     - python-netaddr
 
-- ansible.builtin.file:
-    path: /etc/systemd/system/synapse.service.d/
+- name: install AUR packages
+  become_user: aur_builder
+  become: yes
+  aur: name={{ item }}
+  with_items: [mautrix-signal-git, mautrix-whatsapp]
+
+- name: synapse log.yaml
+  ansible.builtin.copy:
+    src: log.yaml
+    dest: /etc/synapse/log.yaml
+  notify: restart synapse
+
+- name: synapse config drop-in dir
+  ansible.builtin.file:
+    path: /etc/synapse/conf.d/
     state: directory
 
-- name: configure synapse
+- name: synapse homeserver.yaml base
   ansible.builtin.template:
-    src: '{{ item }}'
-    dest: /etc/synapse/{{ item }}
-  with_items: [homeserver.yaml, log.yaml]
-  notify: restart synapse
+    src: homeserver.yaml
+    dest: /etc/synapse/conf.d/homeserver.yaml
+  notify:
+  - assemble homeserver.yaml
+
+- name: appservice dropin config
+  ansible.builtin.lineinfile:
+    path: /etc/synapse/conf.d/app_service_config_files.yaml
+    create: yes
+    line: 'app_service_config_files:'
+  notify:
+  - assemble homeserver.yaml
 
 - name: start+enable synapse
   ansible.builtin.systemd:
     name: synapse
     state: started
     enabled: yes
-
-- name: import Caddy signing key
-  become_user: aur_builder
-  become: yes
-  shell: gpg --receive-keys 29D0817A67156E4F25DC24782A349DD577D586A5
-
-- name: install packages
-  become_user: aur_builder
-  become: yes
-  aur: name={{ item }}
-  with_items: [mautrix-signal-git, mautrix-whatsapp]
-
 - name: configure Caddy
   ansible.builtin.copy:
     dest: /etc/caddy/conf.d/matrix.conf
@@ -46,3 +55,42 @@
         reverse_proxy http://localhost:8008
       }
   notify: reload caddy
+
+- ansible.builtin.file:
+    path: /var/lib/mautrix-whatsapp/
+    state: directory
+    owner: mautrix-whatsapp
+    group: mautrix-whatsapp
+
+- name: configure mautrix-whatsapp
+  ansible.builtin.template:
+    src: mautrix-whatsapp.yaml
+    dest: /etc/mautrix-whatsapp/mautrix-whatsapp.yaml
+    mode: 0400
+    owner: mautrix-whatsapp
+  notify: restart mautrix-whatsapp
+
+- name: enable+start mautrix-whatsapp.service
+  ansible.builtin.systemd:
+    name: mautrix-whatsapp.service
+    state: started
+    enabled: yes
+
+- name: mautrix-whatsapp-registration.yaml
+  ansible.builtin.template:
+    src: mautrix-whatsapp-registration.yaml
+    dest: /etc/mautrix-whatsapp/mautrix-whatsapp-registration.yaml
+    mode: 0444
+    owner: mautrix-whatsapp
+  notify:
+  - restart mautrix-whatsapp
+  - restart synapse
+
+- name: add mautrix-whatsapp registration to synapse
+  ansible.builtin.lineinfile:
+    path: /etc/synapse/conf.d/app_service_config_files.yaml
+    firstmatch: yes
+    insertafter: 'app_service_config_files:'
+    line: '- /etc/mautrix-whatsapp/mautrix-whatsapp-registration.yaml'
+  notify:
+  - assemble homeserver.yaml

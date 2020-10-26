@@ -33,7 +33,6 @@ database:
 
 log_config: "/etc/synapse/log.yaml"
 
-
 media_store_path: "/var/lib/synapse/media"
 url_preview_enabled: true
 url_preview_ip_range_blacklist:
@@ -53,11 +52,6 @@ enable_metrics: true
 metrics_flags:
   known_servers: true
 report_stats: true
-
-app_service_config_files:
-# - /opt/mautrix-telegram/registration.yaml
-# - /etc/mautrix-whatsapp-registration.yaml
-# - /opt/matrix-puppet-signal/signal-registration.yaml
 
 signing_key_path: "/etc/synapse/homeserver.signing.key"
 trusted_key_servers:
