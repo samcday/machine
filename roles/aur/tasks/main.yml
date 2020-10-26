@@ -11,6 +11,21 @@
     create: yes
     validate: 'visudo -cf %s'
 
+- name: pretend GnuPG isn't dying a slow spasmic death
+  block:
+  - ansible.builtin.file:
+      path: /home/aur_builder/.gnupg
+      state: directory
+      owner: aur_builder
+  - ansible.builtin.file:
+      path: /home/aur_builder/.gnupg/gpg.conf
+      state: touch
+      owner: aur_builder
+  - ansible.builtin.lineinfile:
+      path: /home/aur_builder/.gnupg/gpg.conf
+      regexp: 'keyserver\s+'
+      line: 'keyserver hkp://keyserver.ubuntu.com'
+
 - name: install yay
   become: yes
   become_user: aur_builder
