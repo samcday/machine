@@ -2,12 +2,11 @@ version: 1
 
 formatters:
   precise:
-    format: '%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(request)s - %(message)s'
+    format: '%(name)s:%(lineno)d - %(levelname)s - %(request)s - %(message)s'
 
 handlers:
   console:
     class: logging.StreamHandler
-    stream: stdout
     formatter: precise
 
 loggers:
@@ -18,7 +17,7 @@ loggers:
     propagate: false
 
 root:
-  level: INFO
+  level: WARN
   handlers: [console]
 
 disable_existing_loggers: false
