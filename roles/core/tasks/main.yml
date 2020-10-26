@@ -15,6 +15,7 @@
     - pacman-contrib
     - pacutils
     - ripgrep
+    - rsync
     - rustup
     - sccache
     - sshfs
