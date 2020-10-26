@@ -13,7 +13,9 @@ PrivateKey={{ wgme.prv }}
 PublicKey={{ hostvars[host].wgme.pub }}
 PresharedKey={{ wireguard_psk -}}
 AllowedIPs={{ hostvars[host].wgme.ip }}/32
+{%- if inventory_hostname != 'chonk.samcday.com' %}
 Endpoint={{ host }}:51820
+{% endif %}
 {% endif %}
 
 {% endfor %}
