@@ -19,3 +19,5 @@
     path: /etc/hosts
     line: "{{ hostvars[item].wgme.ip }} {{ item }}.wgme"
   loop: "{{ groups['all'] }}"
+  notify:
+  - reconfigure wgme

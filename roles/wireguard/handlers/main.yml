@@ -1,3 +1,6 @@
 ---
 - name: reload systemd-networkd
   shell: networkctl reload
+
+- name: reconfigure wgme
+  shell: networkctl reconfigure wgme
