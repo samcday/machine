@@ -7,15 +7,18 @@ Description=wgme
 ListenPort=51820
 PrivateKey={{ wgme.prv }}
 
+{% if inventory_hostname == 'chonk.samcday.com' %}
 {% for host in groups['all'] %}
-{%- if hostvars[host].wgme.pub is defined and inventory_hostname != host %}
 [WireGuardPeer]
 PublicKey={{ hostvars[host].wgme.pub }}
 PresharedKey={{ wireguard_psk -}}
 AllowedIPs={{ hostvars[host].wgme.ip }}/32
-{%- if inventory_hostname != 'chonk.samcday.com' %}
-Endpoint={{ host }}:51820
-{% endif %}
-{% endif %}
-
 {% endfor %}
+{% else %}
+[WireGuardPeer]
+PublicKey={{ hostvars['chonk.samcday.com'].wgme.pub }}
+PresharedKey={{ wireguard_psk -}}
+AllowedIPs=192.168.250.0/24
+Endpoint=chonk.samcday.com:51820
+PersistentKeepalive=25
+{% endif %}

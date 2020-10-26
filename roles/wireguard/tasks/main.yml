@@ -8,11 +8,13 @@
       group: systemd-network
     notify:
     - reload systemd-networkd
+    - reconfigure wgme
   - ansible.builtin.template:
       src: 99-wgme.network
       dest: /etc/systemd/network/99-wgme.network
     notify:
     - reload systemd-networkd
+    - reconfigure wgme
 
 - name: generate .wgme host entries
   ansible.builtin.lineinfile:
@@ -21,3 +23,11 @@
   loop: "{{ groups['all'] }}"
   notify:
   - reconfigure wgme
+
+- name: net.ipv4.ip_forward=1
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/net.ipv4.ip_forward=1.conf
+    content: net.ipv4.ip_forward = 1
+  notify:
+  - reload sysctl
+  when: wgme.relay | default(false)
