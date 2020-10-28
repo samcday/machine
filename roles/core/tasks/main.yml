@@ -22,6 +22,7 @@
     - strace
     - sudo
     - tcpdump
+    - unrar
     - unzip
     - wireguard-tools
 
