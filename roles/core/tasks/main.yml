@@ -14,6 +14,9 @@
     - mercurial
     - pacman-contrib
     - pacutils
+    - perl-authen-sasl
+    - perl-mime-tools
+    - perl-net-smtp-ssl
     - reflector
     - ripgrep
     - rsync
