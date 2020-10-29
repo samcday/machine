@@ -47,3 +47,5 @@
   roles:
   - name: matrix-homeserver
     tags: [matrix, homeserver]
+  - name: hydroxide
+    tags: [hydroxide]

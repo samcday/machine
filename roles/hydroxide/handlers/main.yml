@@ -1,0 +1,6 @@
+---
+- name: restart hydroxide
+  ansible.builtin.systemd:
+    name: hydroxide.service
+    daemon_reload: yes
+    state: restarted

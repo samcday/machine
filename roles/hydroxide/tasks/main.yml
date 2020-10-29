@@ -1,0 +1,23 @@
+---
+- name: install hydroxide
+  aur: name=hydroxide
+  become: yes
+  become_user: aur_builder
+
+- name: auth.json
+  ansible.builtin.copy:
+    src: auth.json
+    dest: /root/.config/hydroxide/
+  notify: restart hydroxide
+
+- name: hydroxide.service
+  ansible.builtin.template:
+    src: hydroxide.service
+    dest: /etc/systemd/system/
+  notify: restart hydroxide
+
+- name: enable+start hydroxide.service
+  ansible.builtin.systemd:
+    name: hydroxide.service
+    enabled: yes
+    state: started

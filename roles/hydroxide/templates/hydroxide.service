@@ -1,0 +1,2 @@
+[Service]
+ExecStart=hydroxide -smtp-host={{ wgme.ip }} -imap-host={{ wgme.ip }} -carddav-host={{ wgme.ip }} serve
