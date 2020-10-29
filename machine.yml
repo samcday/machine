@@ -8,6 +8,8 @@
   - sshd
   - name: wireguard
     tags: [network, wireguard]
+  - name: syncthing
+    tags: [syncthing]
 
 - hosts: workstations
   roles:

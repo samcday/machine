@@ -43,9 +43,3 @@
     path: /etc/sudoers
     line: 'Defaults syslog_goodpri=none'
     validate: /usr/bin/visudo -cf %s
-
-- name: enable+start syncthing@sam.service
-  ansible.builtin.systemd:
-    name: syncthing@sam.service
-    enabled: yes
-    state: started

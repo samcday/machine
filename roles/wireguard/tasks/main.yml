@@ -19,7 +19,7 @@
 - name: generate .wgme host entries
   ansible.builtin.lineinfile:
     path: /etc/hosts
-    line: "{{ hostvars[item].wgme.ip }} {{ item }}.wgme"
+    line: "{{ hostvars[item].wgme.ip }} {{ item.split('.')[0] }}.wgme"
   loop: "{{ groups['all'] }}"
   notify:
   - reconfigure wgme

@@ -1,0 +1,48 @@
+---
+- name: create {{ syncthing_user }} user
+  user:
+    name: '{{ syncthing_user }}'
+  when: syncthing_user != 'sam'
+
+- name: enable+start syncthing@{{ syncthing_user }}.service
+  ansible.builtin.systemd:
+    name: syncthing@{{ syncthing_user }}.service
+    enabled: yes
+    state: started
+
+- name: getent syncthing user
+  ansible.builtin.getent:
+    database: passwd
+    key: '{{ syncthing_user }}'
+
+- ansible.builtin.set_fact:
+    syncthing_home: '{{ getent_passwd[syncthing_user][4] }}/.config/syncthing'
+
+- name: generate syncthing config
+  shell:
+    cmd: syncthing --generate {{ syncthing_home }}
+    creates: '{{ syncthing_home }}'
+
+- name: listen on wgme interface
+  ansible.builtin.lineinfile:
+    path: '{{ syncthing_home }}/config.xml'
+    insertafter: '\<gui[ >]'
+    regexp: '\<address[ >]'
+    line: '<address>{{ wgme.ip }}:8324</address>'
+  notify: restart syncthing
+
+- name: gui username
+  ansible.builtin.lineinfile:
+    path: '{{ syncthing_home }}/config.xml'
+    insertafter: '\<gui[ >]'
+    regexp: '<user>'
+    line: '<user>sam</user>'
+  notify: restart syncthing
+
+- name: gui password
+  ansible.builtin.lineinfile:
+    path: '{{ syncthing_home }}/config.xml'
+    insertafter: '\<gui[ >]'
+    regexp: '<password>'
+    line: '<password>$2a$10$670Ya4R5un4zFoEXRT8KROzRiWIjHd4px6ntPInqBCK7B.2zaAch.</password>'
+  notify: restart syncthing
