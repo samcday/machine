@@ -5,6 +5,8 @@
     - alsa-utils
     - brightnessctl
     - gammastep
+    - gnome-keyring
+    - libsecret
     - noto-fonts
     - noto-fonts-emoji
     - pamixer
