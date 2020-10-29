@@ -1,0 +1,27 @@
+---
+- name: import Caddy signing key
+  become_user: aur_builder
+  become: yes
+  shell: gpg --receive-keys 29D0817A67156E4F25DC24782A349DD577D586A5
+
+- name: install Caddy
+  become_user: aur_builder
+  become: yes
+  aur: name=caddy2
+
+- name: fix broken default Caddyfile
+  ansible.builtin.lineinfile:
+    path: /etc/caddy/Caddyfile
+    regexp: '\:80'
+    state: absent
+- name: fix broken default Caddyfile
+  ansible.builtin.lineinfile:
+    path: /etc/caddy/Caddyfile
+    regexp: 'root \*'
+    state: absent
+
+- name: ensure Caddy is running+enabled
+  ansible.builtin.systemd:
+    name: caddy.service
+    state: started
+    enabled: yes
