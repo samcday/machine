@@ -14,6 +14,7 @@
     - mercurial
     - pacman-contrib
     - pacutils
+    - reflector
     - ripgrep
     - rsync
     - rustup
@@ -71,3 +72,18 @@
     name: chronyd.service
     enabled: yes
     state: started
+
+- name: /etc/xdg/reflector/reflector.conf
+  ansible.builtin.copy:
+    src: reflector.conf
+    dest: /etc/xdg/reflector/reflector.conf
+
+- name: enable reflector.timer
+  ansible.builtin.systemd:
+    name: reflector.timer
+    enabled: yes
+
+- name: reflector pacman hook
+  ansible.builtin.copy:
+    src: reflector.hook
+    dest: /etc/pacman.d/hooks/reflector.hook

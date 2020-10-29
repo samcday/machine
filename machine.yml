@@ -11,8 +11,6 @@
 
 - hosts: workstations
   roles:
-  - name: core
-    tags: [core]
   - name: bluetooth
     tags: [bluetooth]
   - zsh
