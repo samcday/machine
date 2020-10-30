@@ -1,0 +1,5 @@
+---
+- name: restart reflector
+  ansible.builtin.systemd:
+    name: reflector
+    state: restarted
