@@ -89,4 +89,4 @@
 - name: reflector pacman hook
   ansible.builtin.copy:
     src: reflector.hook
-    dest: /etc/pacman.d/hooks/reflector.hook
+    dest: /etc/pacman.d/hooks/
