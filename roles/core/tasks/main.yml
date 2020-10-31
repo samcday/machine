@@ -12,11 +12,13 @@
     - jre-openjdk
     - man
     - mercurial
+    - mlocate
     - pacman-contrib
     - pacutils
     - perl-authen-sasl
     - perl-mime-tools
     - perl-net-smtp-ssl
+    - plocate
     - reflector
     - ripgrep
     - rsync
@@ -90,3 +92,14 @@
   ansible.builtin.copy:
     src: reflector.hook
     dest: /etc/pacman.d/hooks/
+
+- name: enable plocate-build
+  ansible.builtin.systemd:
+    name: plocate-build.service
+    enabled: yes
+
+- name: enable+start updatedb.timer
+  ansible.builtin.systemd:
+    name: updatedb.timer
+    enabled: yes
+    state: started
