@@ -17,4 +17,3 @@ kernel_cmdline: >-
   root=/dev/mapper/sammyboi-arch--root
   audit=0
   rw
-enable_dpms: no
