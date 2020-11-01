@@ -1,109 +1,109 @@
 ---
-# - name: install some core packages
-#   community.general.pacman:
-#     name:
-#     - base-devel
-#     - chrony
-#     - ctags
-#     - efibootmgr
-#     - git
-#     - htop
-#     - jq
-#     - jre-openjdk
-#     - man
-#     - mercurial
-#     - mlocate
-#     - pacman-contrib
-#     - pacutils
-#     - perl-authen-sasl
-#     - perl-mime-tools
-#     - perl-net-smtp-ssl
-#     - plocate
-#     - reflector
-#     - restic
-#     - ripgrep
-#     - rsync
-#     - rustup
-#     - sccache
-#     - sshfs
-#     - strace
-#     - sudo
-#     - tcpdump
-#     - unrar
-#     - unzip
-#     - wireguard-tools
+- name: install some core packages
+  community.general.pacman:
+    name:
+    - base-devel
+    - chrony
+    - ctags
+    - efibootmgr
+    - git
+    - htop
+    - jq
+    - jre-openjdk
+    - man
+    - mercurial
+    - mlocate
+    - pacman-contrib
+    - pacutils
+    - perl-authen-sasl
+    - perl-mime-tools
+    - perl-net-smtp-ssl
+    - plocate
+    - reflector
+    - restic
+    - ripgrep
+    - rsync
+    - rustup
+    - sccache
+    - sshfs
+    - strace
+    - sudo
+    - tcpdump
+    - unrar
+    - unzip
+    - wireguard-tools
 
-# - name: wheel sudoers rule
-#   ansible.builtin.lineinfile:
-#     path: /etc/sudoers
-#     regexp: '^%wheel ALL='
-#     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-#     validate: /usr/bin/visudo -cf %s
+- name: wheel sudoers rule
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^%wheel ALL='
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: /usr/bin/visudo -cf %s
 
-# - name: enable en_US UTF8 locale
-#   community.general.locale_gen:
-#     name: en_US.UTF-8
-#     state: present
+- name: enable en_US UTF8 locale
+  community.general.locale_gen:
+    name: en_US.UTF-8
+    state: present
 
-# - name: set locale.conf
-#   ansible.builtin.copy:
-#     content: 'LANG=en_US.UTF-8'
-#     dest: /etc/locale.conf
+- name: set locale.conf
+  ansible.builtin.copy:
+    content: 'LANG=en_US.UTF-8'
+    dest: /etc/locale.conf
 
-# - name: set timezone
-#   ansible.builtin.file:
-#     src: /usr/share/zoneinfo/Europe/Berlin
-#     dest: /etc/localtime
-#     state: link
+- name: set timezone
+  ansible.builtin.file:
+    src: /usr/share/zoneinfo/Europe/Berlin
+    dest: /etc/localtime
+    state: link
 
-# - name: disable systemd-homed PAM modules
-#   ansible.builtin.replace:
-#     path: /etc/pam.d/system-auth
-#     regexp: '^(?!#)(.*pam_systemd_home.so)'
-#     replace: '#\1'
+- name: disable systemd-homed PAM modules
+  ansible.builtin.replace:
+    path: /etc/pam.d/system-auth
+    regexp: '^(?!#)(.*pam_systemd_home.so)'
+    replace: '#\1'
 
-# - name: init pacman-key
-#   shell:
-#     cmd: pacman-key --init && pacman-key --populate
-#     creates: /etc/pacman.d/gnupg
+- name: init pacman-key
+  shell:
+    cmd: pacman-key --init && pacman-key --populate
+    creates: /etc/pacman.d/gnupg
 
-# - name: pretend GnuPG isn't dying a slow spasmic death
-#   ansible.builtin.lineinfile:
-#     path: /etc/pacman.d/gnupg/gpg.conf
-#     regexp: 'keyserver\s+'
-#     line: 'keyserver hkp://keyserver.ubuntu.com'
+- name: pretend GnuPG isn't dying a slow spasmic death
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.d/gnupg/gpg.conf
+    regexp: 'keyserver\s+'
+    line: 'keyserver hkp://keyserver.ubuntu.com'
 
-# - name: enable+start chrony
-#   ansible.builtin.systemd:
-#     name: chronyd.service
-#     enabled: yes
-#     state: started
+- name: enable+start chrony
+  ansible.builtin.systemd:
+    name: chronyd.service
+    enabled: yes
+    state: started
 
-# - name: /etc/xdg/reflector/reflector.conf
-#   ansible.builtin.copy:
-#     src: reflector.conf
-#     dest: /etc/xdg/reflector/reflector.conf
+- name: /etc/xdg/reflector/reflector.conf
+  ansible.builtin.copy:
+    src: reflector.conf
+    dest: /etc/xdg/reflector/reflector.conf
 
-# - name: enable reflector.timer
-#   ansible.builtin.systemd:
-#     name: reflector.timer
-#     enabled: yes
+- name: enable reflector.timer
+  ansible.builtin.systemd:
+    name: reflector.timer
+    enabled: yes
 
-# - name: reflector pacman hook
-#   ansible.builtin.copy:
-#     src: reflector.hook
-#     dest: /etc/pacman.d/hooks/
+- name: reflector pacman hook
+  ansible.builtin.copy:
+    src: reflector.hook
+    dest: /etc/pacman.d/hooks/
 
-# - name: enable plocate-build
-#   ansible.builtin.systemd:
-#     name: plocate-build.service
-#     enabled: yes
+- name: enable plocate-build
+  ansible.builtin.systemd:
+    name: plocate-build.service
+    enabled: yes
 
-# - name: enable+start updatedb.timer
-#   ansible.builtin.systemd:
-#     name: updatedb.timer
-#     enabled: yes
-#     state: started
+- name: enable+start updatedb.timer
+  ansible.builtin.systemd:
+    name: updatedb.timer
+    enabled: yes
+    state: started
 
 - name: /etc/conf.d
   ansible.builtin.file:
