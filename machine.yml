@@ -19,7 +19,7 @@
   - name: systemd-networkd
     tags: [network]
   - name: desktop-core
-    tags: [desktop]
+    tags: [desktop, desktop-core]
   - name: sway-desktop
     tags: [desktop]
   - name: desktop-apps

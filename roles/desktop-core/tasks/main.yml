@@ -45,3 +45,11 @@
     path: /etc/sudoers
     line: 'Defaults syslog_goodpri=none'
     validate: /usr/bin/visudo -cf %s
+
+- name: gnome-keyring pam integration
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/login
+    line: '{{ item }}'
+  with_items:
+    - auth optional pam_gnome_keyring.so
+    - session optional pam_gnome_keyring.so auto_start
