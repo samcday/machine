@@ -28,8 +28,6 @@
     tags: [snap]
   - name: boot
     tags: [boot]
-  - name: 1password
-    tags: [1password]
   - name: stats
     tags: [stats]
 
