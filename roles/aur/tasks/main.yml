@@ -4,6 +4,11 @@
     name: aur_builder
     group: wheel
 
+- name: don't backup aur_builder home dir
+  ansible.builtin.file:
+    path: ~aur_builder/.restic-ignore
+    state: touch
+
 - name: setup aur_builder sudo perms
   lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
