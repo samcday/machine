@@ -111,7 +111,7 @@
     state: directory
 
 - name: /etc/conf.d/restic
-  ansible.builtin.template:
+  ansible.builtin.file:
     src: restic.conf.d
     dest: /etc/conf.d/restic
     mode: 0600
