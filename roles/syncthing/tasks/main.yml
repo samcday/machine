@@ -1,4 +1,7 @@
 ---
+- name: install syncthing
+  community.general.pacman: name=syncthing
+
 - name: create {{ syncthing_user }} user
   user:
     name: '{{ syncthing_user }}'

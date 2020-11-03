@@ -12,8 +12,7 @@ wgme:
   pub: 82xSogfNwqdBHJFmV4uliwN6s0GVXwfCKZW9URrM2Aw=
 
 kernel_cmdline: >-
-  rd.luks.key=e5302fad-880b-4178-aa8e-201b472dbc5e=/keyfile:UUID=28ac8288-d453-4752-9f02-b1e23ad3efec
-  rd.luks.name=e5302fad-880b-4178-aa8e-201b472dbc5e=root
-  root=/dev/mapper/sammyboi-arch--root
+  rd.luks.name=a5f46bfd-8eff-4b8e-8aa9-24ce36b5c733=root
+  root=/dev/mapper/root
   audit=0
   rw

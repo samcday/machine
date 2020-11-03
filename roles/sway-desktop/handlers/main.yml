@@ -4,12 +4,14 @@
   become_user: sam
   command:
     cmd: systemctl --user daemon-reload
+  ignore_errors: yes
 
 - name: restart swayidle.service
   become: yes
   become_user: sam
   command:
     cmd: systemctl --user restart swayidle.service
+  ignore_errors: yes
 
 - name: refresh pacman
   community.general.pacman:

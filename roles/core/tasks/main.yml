@@ -2,6 +2,7 @@
 - name: install some core packages
   community.general.pacman:
     name:
+    - avahi
     - base-devel
     - chrony
     - ctags
