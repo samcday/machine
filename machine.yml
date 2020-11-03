@@ -21,7 +21,7 @@
   - name: desktop-core
     tags: [desktop, desktop-core]
   - name: sway-desktop
-    tags: [desktop]
+    tags: [desktop, sway]
   - name: desktop-apps
     tags: [desktop, desktop-apps]
   - name: snap
