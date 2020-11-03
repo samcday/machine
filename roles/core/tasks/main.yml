@@ -12,6 +12,7 @@
     - iwd
     - jq
     - jre-openjdk
+    - lsof
     - lvm2
     - man
     - mercurial
@@ -22,6 +23,7 @@
     - perl-mime-tools
     - perl-net-smtp-ssl
     - plocate
+    - procps-ng
     - reflector
     - ripgrep
     - rsync
