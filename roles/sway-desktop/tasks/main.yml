@@ -28,6 +28,7 @@
     - sway
     - wallutils
     - waybar
+    - xorg-server-xwayland
 
 - name: install swaylock-effects
   become: yes
