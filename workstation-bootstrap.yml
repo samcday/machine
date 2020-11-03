@@ -1,0 +1,7 @@
+---
+- hosts: workstations
+  roles:
+  - core
+  - systemd-networkd
+  - aur
+  - boot
