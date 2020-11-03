@@ -16,8 +16,10 @@
   - name: bluetooth
     tags: [bluetooth]
   - zsh
-  - name: systemd-networkd
+  - name: networking
     tags: [network]
+  - name: dns
+    tags: [network, dns]
   - name: desktop-core
     tags: [desktop, desktop-core]
   - name: sway-desktop

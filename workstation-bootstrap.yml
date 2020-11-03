@@ -2,6 +2,6 @@
 - hosts: workstations
   roles:
   - core
-  - systemd-networkd
+  - networking
   - aur
   - boot

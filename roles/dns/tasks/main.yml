@@ -1,26 +1,4 @@
 ---
-- name: setup network config
-  ansible.builtin.copy:
-    src: 20-{{ item }}.network
-    dest: /etc/systemd/network/20-{{ item }}.network
-  with_items:
-  - wired
-  - wifi
-  notify:
-  - reload systemd-networkd
-
-- name: ensure systemd-networkd is running + enabled.
-  ansible.builtin.systemd:
-    name: systemd-networkd.service
-    state: started
-    enabled: yes
-
-- name: ensure systemd-resolved is running + enabled.
-  ansible.builtin.systemd:
-    name: systemd-resolved.service
-    state: started
-    enabled: yes
-
 - name: /etc/resolv.conf
   ansible.builtin.file:
     path: /etc/resolv.conf
@@ -44,13 +22,6 @@
     line: MulticastDNS=yes
   notify: restart systemd-resolved
 
-- name: configure search domains
-  ansible.builtin.lineinfile:
-    path: /etc/systemd/resolved.conf
-    regexp: Domains=
-    line: Domains=local wgme
-  notify: restart systemd-resolved
-
 - name: enable DNSoTLS
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
@@ -65,7 +36,9 @@
     line: DNS=1.1.1.1 1.0.0.1
   notify: restart systemd-resolved
 
-- name: local hostname
+- name: configure search domains
   ansible.builtin.lineinfile:
-    path: /etc/hosts
-    line: 127.0.0.1 {{ inventory_hostname }}
+    path: /etc/systemd/resolved.conf
+    regexp: Domains=
+    line: Domains=local wgme
+  notify: restart systemd-resolved
