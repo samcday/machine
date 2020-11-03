@@ -20,7 +20,6 @@
     - perl-net-smtp-ssl
     - plocate
     - reflector
-    - restic
     - ripgrep
     - rsync
     - rustup
@@ -109,33 +108,3 @@
   ansible.builtin.file:
     path: /etc/conf.d
     state: directory
-
-- name: /etc/conf.d/restic
-  ansible.builtin.copy:
-    src: restic.conf.d
-    dest: /etc/conf.d/restic
-    mode: 0600
-
-- name: /var/cache/restic
-  ansible.builtin.file:
-    path: /var/cache/restic
-    state: directory
-    mode: 0700
-
-- name: restic-snapshot.service
-  ansible.builtin.copy:
-    src: restic-snapshot.service
-    dest: /etc/systemd/system/restic-snapshot.service
-  notify: restart restic-snapshot.timer
-
-- name: restic-snapshot.timer
-  ansible.builtin.copy:
-    src: restic-snapshot.timer
-    dest: /etc/systemd/system/restic-snapshot.timer
-  notify: restart restic-snapshot.timer
-
-- name: start+enable restic-snapshot.timer
-  ansible.builtin.systemd:
-    name: restic-snapshot.timer
-    enabled: yes
-    state: started
