@@ -8,8 +8,10 @@
     - efibootmgr
     - git
     - htop
+    - iwd
     - jq
     - jre-openjdk
+    - lvm2
     - man
     - mercurial
     - mlocate
