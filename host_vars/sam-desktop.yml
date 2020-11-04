@@ -13,6 +13,7 @@ wgme:
 
 kernel_cmdline: >-
   rd.luks.name=a5f46bfd-8eff-4b8e-8aa9-24ce36b5c733=root
+  rd.luks.options=discard
   root=/dev/mapper/root
   audit=0
   rw
