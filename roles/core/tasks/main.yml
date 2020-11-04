@@ -7,6 +7,7 @@
     - chrony
     - ctags
     - efibootmgr
+    - fwupd
     - git
     - htop
     - iwd
