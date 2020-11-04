@@ -10,6 +10,8 @@
     tags: [network, wireguard]
   - name: syncthing
     tags: [syncthing]
+  - name: restic
+    tags: [restic]
 
 - hosts: workstations
   roles:
