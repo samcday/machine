@@ -21,13 +21,16 @@
     - alacritty
     - bemenu
     - bemenu-wlroots
+    - grim
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - mako
     - otf-font-awesome # for waybar
     - qt5-wayland
+    - slurp
     - sway
     - wallutils
     - waybar
+    - wl-clipboard
     - xorg-server-xwayland
 
 - name: install swaylock-effects
