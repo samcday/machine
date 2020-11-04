@@ -1,20 +1,4 @@
 ---
-- name: install gtk-layer-shell-git
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: gtk-layer-shell-git
-    state: present
-
-# Needed for unreleased merge from back in March:
-# https://github.com/swaywm/swayidle/pull/63/files
-- name: install swayidle-git
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: swayidle-git
-    state: present
-
 - name: install packages
   community.general.pacman:
     name:
@@ -33,12 +17,19 @@
     - wl-clipboard
     - xorg-server-xwayland
 
-- name: install swaylock-effects
+- name: install packages
   become: yes
   become_user: aur_builder
   aur:
-    name: swaylock-effects
+    name: {{ item }}
     state: present
+  with_items:
+  - gtk-layer-shell-git
+  # Needed for unreleased merge from back in March:
+  # https://github.com/swaywm/swayidle/pull/63/files
+  - swayidle-git
+  - swaylock-effects
+  - wev
 
 - ansible.builtin.file:
     path: /etc/systemd/system/getty@tty1.service.d/
