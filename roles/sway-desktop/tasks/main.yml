@@ -21,7 +21,7 @@
   become: yes
   become_user: aur_builder
   aur:
-    name: {{ item }}
+    name: '{{ item }}'
     state: present
   with_items:
   - gtk-layer-shell-git

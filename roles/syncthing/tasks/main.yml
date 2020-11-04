@@ -49,3 +49,39 @@
     regexp: '<password>'
     line: '<password>$2a$10$670Ya4R5un4zFoEXRT8KROzRiWIjHd4px6ntPInqBCK7B.2zaAch.</password>'
   notify: restart syncthing
+
+- name: install bindfs
+  aur:
+    name: bindfs
+  become: yes
+  become_user: aur_builder
+
+- name: alias mount.fuse.bindfs
+  ansible.builtin.file:
+    src: /usr/bin/bindfs
+    path: /usr/bin/mount.fuse.bindfs
+    state: link
+
+- name: make pacman cache available to syncthing user
+  ansible.builtin.copy:
+    dest: '{{ item.path }}'
+    content: '{{ item.content }}'
+  with_items:
+  - path: /etc/systemd/system/home-{{ syncthing_user }}-.cache-pacman.automount
+    content: |
+      [Automount]
+      Where=/home/{{ syncthing_user }}/.cache/pacman
+      TimeoutIdleSec=60
+  - path: /etc/systemd/system/home-{{ syncthing_user }}-.cache-pacman.mount
+    content: |
+      [Mount]
+      What=/var/cache/pacman
+      Where=/home/{{ syncthing_user }}/.cache/pacman
+      Type=fuse.bindfs
+      Options=map=root/{{ syncthing_user }}:@root/@{{ syncthing_user }}
+  notify: restart pacman_cache.automount
+
+- name: enable pacman_cache.automount
+  ansible.builtin.systemd:
+    name: home-{{ syncthing_user }}-.cache-pacman.automount
+    enabled: yes

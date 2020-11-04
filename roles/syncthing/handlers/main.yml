@@ -3,3 +3,10 @@
   ansible.builtin.systemd:
     name: syncthing@{{ syncthing_user }}.service
     state: restarted
+
+- name: restart pacman_cache.automount
+  ansible.builtin.systemd:
+    name: home-{{ syncthing_user }}-.cache-pacman.automount
+    daemon_reload: yes
+    state: restarted
+  ignore_errors: yes
