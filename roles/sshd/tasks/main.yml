@@ -1,6 +1,7 @@
 ---
 - name: install openssh
-  community.general.pacman: name=openssh
+  become_user: aur_builder
+  aur: name=openssh
 
 - name: enable+start sshd
   ansible.builtin.systemd:

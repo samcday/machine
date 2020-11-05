@@ -1,6 +1,7 @@
 ---
 - name: install restic
-  community.general.pacman: name=restic
+  become_user: aur_builder
+  aur: name=restic
 
 - name: /etc/conf.d/restic
   ansible.builtin.copy:

@@ -1,7 +1,0 @@
----
-- name: install slack-desktop
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: slack-desktop
-    state: present

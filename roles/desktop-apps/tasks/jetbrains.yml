@@ -1,7 +1,0 @@
----
-- name: install jetbrains-toolbox
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: jetbrains-toolbox
-    state: present

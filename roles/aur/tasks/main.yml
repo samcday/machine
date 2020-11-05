@@ -5,9 +5,9 @@
     group: wheel
 
 - name: don't backup aur_builder home dir
-  ansible.builtin.file:
-    path: ~aur_builder/.restic-ignore
-    state: touch
+  ansible.builtin.copy:
+    dest: ~aur_builder/.restic-ignore
+    content: ''
 
 - name: setup aur_builder sudo perms
   lineinfile:
@@ -22,20 +22,17 @@
       path: /home/aur_builder/.gnupg
       state: directory
       owner: aur_builder
-  - ansible.builtin.file:
-      path: /home/aur_builder/.gnupg/gpg.conf
-      state: touch
-      owner: aur_builder
   - ansible.builtin.lineinfile:
       path: /home/aur_builder/.gnupg/gpg.conf
+      create: yes
       regexp: 'keyserver\s+'
       line: 'keyserver hkp://keyserver.ubuntu.com'
 
-- name: install yay
+- name: install paru
   become: yes
   become_user: aur_builder
   aur:
-    name: yay
+    name: paru
     state: present
 
 - name: install chezmoi

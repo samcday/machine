@@ -1,6 +1,7 @@
 ---
 - name: install packages
-  community.general.pacman:
+  become_user: aur_builder
+  aur:
     name:
     - clevis
     - dracut

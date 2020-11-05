@@ -2,9 +2,8 @@
 - name: import Caddy signing key
   become_user: aur_builder
   become: yes
-  gpg_key:
-    fpr: 29D0817A67156E4F25DC24782A349DD577D586A5
-    manage_trust: no
+  gpg_import:
+    key_id: 29D0817A67156E4F25DC24782A349DD577D586A5
 
 - name: install Caddy
   become_user: aur_builder

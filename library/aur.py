@@ -103,6 +103,7 @@ EXAMPLES = '''
 def_lang = ['env', 'LC_ALL=C']
 
 use_cmd = {
+    'paru': ['paru', '-S', '--noconfirm', '--needed', '--cleanafter'],
     'yay': ['yay', '-S', '--noconfirm', '--needed', '--cleanafter'],
     'pacaur': ['pacaur', '-S', '--noconfirm', '--noedit', '--needed'],
     'trizen': ['trizen', '-S', '--noconfirm', '--noedit', '--needed'],

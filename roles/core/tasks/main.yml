@@ -1,6 +1,7 @@
 ---
 - name: install some core packages
-  community.general.pacman:
+  become_user: aur_builder
+  aur:
     name:
     - avahi
     - base-devel
@@ -40,6 +41,12 @@
     - unzip
     - wget
     - wireguard-tools
+
+- name: colorful pacman
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: 'Color$'
+    line: Color
 
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:

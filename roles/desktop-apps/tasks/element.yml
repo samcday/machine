@@ -1,3 +1,0 @@
----
-- name: install element
-  community.general.pacman: name=element-desktop

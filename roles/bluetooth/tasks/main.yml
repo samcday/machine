@@ -1,6 +1,7 @@
 ---
 - name: install bluetooth packages
-  community.general.pacman:
+  become_user: aur_builder
+  aur:
     name:
     - bluez
     - bluez-utils

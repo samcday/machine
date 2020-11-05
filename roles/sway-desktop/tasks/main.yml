@@ -1,6 +1,7 @@
 ---
 - name: install packages
-  community.general.pacman:
+  become_user: aur_builder
+  aur:
     name:
     - alacritty
     - bemenu
@@ -57,9 +58,8 @@
 - name: import wob key
   become: yes
   become_user: aur_builder
-  shell:
-    cmd: curl 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x5c6da024dde27178073ea103f4b432d5d67990e3' | gpg --import
-    warn: false
+  gpg_import:
+    key_id: 5c6da024dde27178073ea103f4b432d5d67990e3
 
 - name: install wob
   become: yes

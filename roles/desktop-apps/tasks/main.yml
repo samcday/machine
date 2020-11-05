@@ -1,6 +1,40 @@
 ---
-- import_tasks: jetbrains.yml
-- import_tasks: sublime-text.yml
-# - import_tasks: ungoogled-chromium.yml
-- import_tasks: firefox.yml
-- import_tasks: element.yml
+- name: import keys into pacman
+  pacman_key:
+    id: '{{ item.id }}'
+    fingerprint: '{{ item.fingerprint }}'
+    keyserver: keyserver.ubuntu.com
+  with_items:
+  - id: ADAE6AD28A8F901A
+    fingerprint: 1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A
+  - id: E5786B42E8E5D565
+    fingerprint: 3DEA62513C8035383A245A12E5786B42E8E5D565
+
+- name: add custom repos to pacman.conf
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    marker: "# {mark} {{ item.name }}"
+    block: |
+      [{{ item.name }}]
+      Server = {{ item.server }}
+  notify: refresh pacman
+  with_items:
+  - name: sublime-text
+    server: https://download.sublimetext.com/arch/stable/x86_64
+  # - name: jk-aur
+  #   server: https://repo.vin.ovh/arch/$arch
+
+- meta: flush_handlers
+
+- name: install desktop apps
+  become_user: aur_builder
+  aur:
+    name:
+    - element-desktop
+    - firefox
+    - jetbrains-toolbox
+    - obs-studio-wayland
+    - slack-desktop
+    - sublime-text
+    # - ungoogled-chromium
+    - wlrobs

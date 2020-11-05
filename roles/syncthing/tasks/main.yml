@@ -1,6 +1,7 @@
 ---
 - name: install syncthing
-  community.general.pacman: name=syncthing
+  become_user: aur_builder
+  aur: name=syncthing
 
 - name: create {{ syncthing_user }} user
   user:
