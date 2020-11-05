@@ -1,9 +1,8 @@
 ---
 - name: import & trust sublime gpg key
-  shell:
-    cmd: |
-      pacman-key --recv-keys 0x1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A \
-      && pacman-key --lsign-key 8A8F901A
+  pacman_key:
+    id: ADAE6AD28A8F901A
+    fingerprint: 1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A
 
 - name: add sublime-text repo to pacman.conf
   ansible.builtin.blockinfile:

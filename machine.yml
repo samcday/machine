@@ -12,6 +12,8 @@
     tags: [syncthing]
   - name: restic
     tags: [restic]
+  - name: caddy
+    tags: [caddy]
 
 - hosts: workstations
   roles:
