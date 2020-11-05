@@ -72,6 +72,8 @@
       [Automount]
       Where=/home/{{ syncthing_user }}/.cache/pacman
       TimeoutIdleSec=60
+      [Install]
+      WantedBy=multi-user.target
   - path: /etc/systemd/system/home-{{ syncthing_user }}-.cache-pacman.mount
     content: |
       [Mount]
