@@ -40,5 +40,5 @@
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
     regexp: Domains=
-    line: Domains=local wgme
+    line: Domains=local
   notify: restart systemd-resolved
