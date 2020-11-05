@@ -22,11 +22,11 @@
     line: MulticastDNS=yes
   notify: restart systemd-resolved
 
-- name: enable DNSoTLS
+- name: disable DNSoTLS :(
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
     regexp: 'DNSOverTLS='
-    line: DNSOverTLS=yes
+    line: DNSOverTLS=no
   notify: restart systemd-resolved
 
 - name: 1.1.1.1 DNS
@@ -40,5 +40,5 @@
   ansible.builtin.lineinfile:
     path: /etc/systemd/resolved.conf
     regexp: Domains=
-    line: Domains=local
+    line: Domains=local wgme
   notify: restart systemd-resolved
