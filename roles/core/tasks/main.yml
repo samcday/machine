@@ -4,12 +4,14 @@
     name:
     - avahi
     - base-devel
+    - bat
     - chrony
     - ctags
     - efibootmgr
     - fwupd
     - git
     - htop
+    - inetutils
     - iwd
     - jq
     - jre-openjdk
@@ -36,6 +38,7 @@
     - tcpdump
     - unrar
     - unzip
+    - wget
     - wireguard-tools
 
 - name: wheel sudoers rule
