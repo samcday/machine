@@ -1,5 +1,6 @@
 ---
 - name: install packages
+  become_user: aur_builder
   aur:
     name:
     - gnome

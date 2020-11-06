@@ -28,16 +28,23 @@
       regexp: 'keyserver\s+'
       line: 'keyserver hkp://keyserver.ubuntu.com'
 
-- name: install paru
-  become: yes
+- become: yes
   become_user: aur_builder
-  aur:
-    name: paru
-    state: present
-
-- name: install chezmoi
-  become: yes
-  become_user: aur_builder
-  aur:
-    name: chezmoi-git
-    state: present
+  block:
+  - name: install stable rust compiler
+    shell:
+      cmd: rustup install stable
+      creates: ~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu
+  - name: make stable rust compiler default
+    ansible.builtin.lineinfile:
+      path: ~/.rustup/settings.toml
+      line: default_toolchain = "stable-x86_64-unknown-linux-gnu"
+      regexp: default_toolchain
+      insertbefore: \[overrides\]
+      firstmatch: yes
+  - name: install packages
+    aur:
+      name:
+      - chezmoi
+      - paru
+      state: present
