@@ -21,6 +21,7 @@
     - man
     - mercurial
     - mlocate
+    - ngrep
     - pacman-contrib
     - pacutils
     - perl-authen-sasl

@@ -6,6 +6,7 @@
     - alsa-utils
     - brightnessctl
     - gammastep
+    - gdm
     - gnome-keyring
     - libsecret
     - noto-fonts
@@ -54,3 +55,8 @@
   with_items:
     - auth optional pam_gnome_keyring.so
     - session optional pam_gnome_keyring.so auto_start
+
+- name: enable gdm
+  ansible.builtin.systemd:
+    name: gdm.service
+    enabled: yes

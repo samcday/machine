@@ -1,0 +1,6 @@
+---
+- name: install packages
+  aur:
+    name:
+    - gnome
+    - xdg-desktop-portal-gtk

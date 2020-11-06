@@ -26,8 +26,10 @@
     tags: [network, dns]
   - name: desktop-core
     tags: [desktop, desktop-core]
-  - name: sway-desktop
+  - name: desktop-sway
     tags: [desktop, sway]
+  - name: desktop-gnome
+    tags: [desktop, gnome]
   - name: desktop-apps
     tags: [desktop, desktop-apps]
   - name: snap
