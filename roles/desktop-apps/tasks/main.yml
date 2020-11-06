@@ -31,7 +31,7 @@
   aur:
     name:
     - element-desktop
-    - firefox
+    - fedora-firefox-wayland-bin
     - jetbrains-toolbox
     - obs-studio-wayland
     - slack-desktop
