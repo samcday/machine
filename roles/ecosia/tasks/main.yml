@@ -1,0 +1,8 @@
+---
+- name: samcosia
+  ansible.builtin.user:
+    name: samcosia
+    password: $6$asdl;fj34uio56hw$MCQy0kViHmk12irofIdu17mZCrfhNwPBPSAbjZiV1SW8jm4nSj./mHddnrhuL668nmAtnjrThDeYf1UocpKcG.
+    shell: /usr/bin/zsh
+    append: yes
+    groups: [docker, wheel]

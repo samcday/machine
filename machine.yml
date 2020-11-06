@@ -22,6 +22,7 @@
   - {name: snap,           tags: [snap]}
   - {name: boot,           tags: [boot]}
   - {name: stats,          tags: [stats]}
+  - {name: ecosia,         tags: [ecosia]}
 
 - hosts: sam-desktop
   tasks:
