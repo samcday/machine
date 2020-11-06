@@ -1,43 +1,27 @@
 ---
 - hosts: all
   roles:
-  - name: core
-    tags: [core]
-  - name: aur
-    tags: [aur]
-  - sshd
-  - name: wireguard
-    tags: [network, wireguard]
-  - name: syncthing
-    tags: [syncthing]
-  - name: restic
-    tags: [restic]
-  - name: caddy
-    tags: [caddy]
+  - {name: core,           tags: [core]}
+  - {name: aur,            tags: [aur]}
+  - {name: sshd,           tags: [ssh]}
+  - {name: wireguard,      tags: [network, wireguard]}
+  - {name: syncthing,      tags: [syncthing]}
+  - {name: restic,         tags: [restic]}
+  - {name: caddy,          tags: [caddy]}
 
 - hosts: workstations
   roles:
-  - name: bluetooth
-    tags: [bluetooth]
-  - zsh
-  - name: networking
-    tags: [network]
-  - name: dns
-    tags: [network, dns]
-  - name: desktop-core
-    tags: [desktop, desktop-core]
-  - name: desktop-sway
-    tags: [desktop, sway]
-  - name: desktop-gnome
-    tags: [desktop, gnome]
-  - name: desktop-apps
-    tags: [desktop, desktop-apps]
-  - name: snap
-    tags: [snap]
-  - name: boot
-    tags: [boot]
-  - name: stats
-    tags: [stats]
+  - {name: bluetooth,      tags: [bluetooth]}
+  - {name: zsh,            tags: [zsh]}
+  - {name: networking,     tags: [network]}
+  - {name: dns,            tags: [network, dns]}
+  - {name: desktop-core,   tags: [desktop, desktop-core]}
+  - {name: desktop-sway,   tags: [desktop, sway]}
+  - {name: desktop-gnome,  tags: [desktop, gnome]}
+  - {name: desktop-apps,   tags: [desktop, desktop-apps]}
+  - {name: snap,           tags: [snap]}
+  - {name: boot,           tags: [boot]}
+  - {name: stats,          tags: [stats]}
 
 - hosts: sam-desktop
   tasks:
@@ -46,12 +30,9 @@
       content: 'blacklist sp5100_tco'
       dest: /etc/modprobe.d/sp5100_tco.conf
   roles:
-  - name: asus-wmi-sensors
-    tags: [asus]
+  - {name: asus-wmi-sensors,  tags: [asus]}
 
 - hosts: chonk.samcday.com
   roles:
-  - name: matrix-homeserver
-    tags: [matrix, homeserver]
-  - name: hydroxide
-    tags: [hydroxide]
+  - {name: matrix-homeserver, tags: [matrix, homeserver]}
+  - {name: hydroxide,         tags: [hydroxide]}
