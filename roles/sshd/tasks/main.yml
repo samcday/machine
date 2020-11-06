@@ -8,3 +8,10 @@
     name: sshd
     enabled: yes
     state: started
+
+- name: StreamLocalBindUnlink yes
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    line: StreamLocalBindUnlink yes
+    regexp: StreamLocalBindUnlink
+    validate: sshd -tf %s
