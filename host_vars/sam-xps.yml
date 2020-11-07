@@ -11,6 +11,7 @@ wgme:
   pub: 3/lZbPUY80cYjeY6D4x10HDtn8f0BQY9dgSnyokoyB8=
 
 kernel_cmdline: >-
-  root=/dev/vg0/root
+  rd.luks.name=7f84f658-acca-4c23-85f7-5d7aaa761012=root
+  rd.luks.allow-discards
+  root=/dev/mapper/root
   audit=0
-  rw
