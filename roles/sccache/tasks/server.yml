@@ -12,8 +12,10 @@
     content: |
       [Service]
       Environment=SCCACHE_NO_DAEMON=1
-      Environment=RUST_LOG=info
+      Environment=RUST_LOG=warn
       ExecStart=/usr/bin/sccache-dist server --config /etc/sccache-server.conf
+      [Install]
+      WantedBy=multi-user.target
   notify: restart sccache-server.service
 
 - name: enable sccache-server.service
