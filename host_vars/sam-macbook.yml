@@ -11,6 +11,8 @@ wgme:
     6163323662656366376564643034613230383733306634393434
   pub: hR7+OAWVJyL2Ekan1TtOU4lQVZtOsUlgC3YbgPq8B3c=
 
+tailscale_ip: 100.70.49.33
+
 kernel_cmdline: >-
   root=/dev/vg0/arch
   audit=0

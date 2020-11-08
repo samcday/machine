@@ -10,6 +10,8 @@ wgme:
     3739366239323537626166656462623632666431303636616335
   pub: 3/lZbPUY80cYjeY6D4x10HDtn8f0BQY9dgSnyokoyB8=
 
+tailscale_ip: 100.109.166.23
+
 kernel_cmdline: >-
   rd.luks.name=7f84f658-acca-4c23-85f7-5d7aaa761012=root
   rd.luks.allow-discards

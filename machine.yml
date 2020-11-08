@@ -4,7 +4,8 @@
   - {name: core,           tags: [core]}
   - {name: aur,            tags: [aur]}
   - {name: sshd,           tags: [ssh]}
-  - {name: wireguard,      tags: [network, wireguard]}
+  # - {name: wireguard,      tags: [network, wireguard]}
+  - {name: tailscale,      tags: [network, tailscale]}
   - {name: syncthing,      tags: [syncthing]}
   - {name: restic,         tags: [restic]}
   - {name: caddy,          tags: [caddy]}

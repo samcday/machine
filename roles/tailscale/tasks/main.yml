@@ -1,0 +1,15 @@
+---
+- name: install tailscale
+  become_user: aur_builder
+  aur: name=tailscale
+
+- name: enable tailscaled.service
+  ansible.builtin.systemd:
+    name: tailscaled.service
+    enabled: yes
+
+- name: generate .private host entries
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ hostvars[item].tailscale_ip }} {{ item.split('.')[0] }}.private"
+  loop: "{{ groups['all'] }}"
