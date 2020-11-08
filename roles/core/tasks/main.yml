@@ -56,6 +56,14 @@
     regexp: 'Color$'
     line: Color
 
+# pacman cache is shared across all machines. Make sure cleaning cache
+# only removes older versions of packages.
+- name: pacman CleanMethod = KeepCurrent
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: CleanMethod
+    line: CleanMethod = KeepCurrent
+
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:
     path: /etc/sudoers
