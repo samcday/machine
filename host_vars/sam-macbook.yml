@@ -19,3 +19,5 @@ kernel_cmdline: >-
   rw
 # This ensures keyboard works during early init.
 extra_drivers: spi_pxa2xx_platform intel_lpss_pci
+
+sccache_enable_server: no

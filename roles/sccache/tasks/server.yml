@@ -1,0 +1,22 @@
+---
+- name: /etc/sccache-server.conf
+  ansible.builtin.template:
+    src: server.conf
+    dest: /etc/sccache-server.conf
+    mode: 0600
+  notify: restart sccache-server.service
+
+- name: sccache-server.service
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/sccache-server.service
+    content: |
+      [Service]
+      Environment=SCCACHE_NO_DAEMON=1
+      Environment=RUST_LOG=info
+      ExecStart=/usr/bin/sccache-dist server --config /etc/sccache-server.conf
+  notify: restart sccache-server.service
+
+- name: enable sccache-server.service
+  ansible.builtin.systemd:
+    name: sccache-server.service
+    enabled: yes

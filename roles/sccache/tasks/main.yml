@@ -1,0 +1,14 @@
+---
+- name: install packages
+  become_user: aur_builder
+  aur:
+    name:
+    - bubblewrap
+    # sccache-git package includes sccache-dist
+    - sccache-git
+
+- import_tasks: server.yml
+  when: sccache_enable_server
+
+- import_tasks: scheduler.yml
+  when: sccache_enable_scheduler

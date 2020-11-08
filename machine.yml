@@ -9,6 +9,7 @@
   - {name: syncthing,      tags: [syncthing]}
   - {name: restic,         tags: [restic]}
   - {name: caddy,          tags: [caddy]}
+  - {name: sccache,        tags: [sccache]}
 
 - hosts: workstations
   roles:

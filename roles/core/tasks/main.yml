@@ -33,7 +33,6 @@
     - ripgrep
     - rsync
     - rustup
-    - sccache
     - sshfs
     - strace
     - sudo

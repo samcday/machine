@@ -9,3 +9,7 @@ wireguard_psk: !vault |
   3061353966356639343839336130663739336661346539643739
 
 syncthing_user: sam
+
+sccache_scheduler_url: sam-desktop.private:10600
+sccache_enable_server: yes
+sccache_enable_scheduler: no
