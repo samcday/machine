@@ -8,6 +8,7 @@
     - bat
     - chrony
     - ctags
+    - docker
     - efibootmgr
     - fwupd
     - git
@@ -41,6 +42,13 @@
     - unzip
     - wget
     - wireguard-tools
+
+- name: enable docker.socket
+  ansible.builtin.systemd:
+    name: docker.socket
+    enabled: yes
+    state: started
+  ignore_errors: yes
 
 - name: colorful pacman
   ansible.builtin.lineinfile:
