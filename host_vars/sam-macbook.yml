@@ -14,9 +14,12 @@ wgme:
 tailscale_ip: 100.70.49.33
 
 kernel_cmdline: >-
-  root=/dev/vg0/arch
+  rd.luks.name=ccadf91b-bca3-4696-a22b-6e6ec9a1042f=root
+  rd.luks.allow-discards
+  root=/dev/mapper/root
   audit=0
   rw
+
 # This ensures keyboard works during early init.
 extra_drivers: spi_pxa2xx_platform intel_lpss_pci
 
