@@ -64,6 +64,15 @@
     regexp: CleanMethod
     line: CleanMethod = KeepCurrent
 
+- name: enable multilib repo in pacman
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    marker: "# {mark} multilib"
+    block: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+  notify: refresh pacman
+
 - name: wheel sudoers rule
   ansible.builtin.lineinfile:
     path: /etc/sudoers
