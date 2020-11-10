@@ -7,6 +7,7 @@
     - bemenu
     - bemenu-wlroots
     - grim
+    - grimshot
     - kde-gtk-config # Failed to load module "colorreload-gtk-module"
     - mako
     - otf-font-awesome # for waybar
