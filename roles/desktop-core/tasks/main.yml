@@ -9,6 +9,9 @@
     - gdm
     - gnome-keyring
     - libsecret
+    - libva-utils
+    - libva-mesa-driver
+    - mesa-vdpau
     - noto-fonts
     - noto-fonts-emoji
     - pamixer
@@ -21,6 +24,7 @@
     - spotifyd
     - ttf-jetbrains-mono
     - usbutils
+    - vdpauinfo
     - watchman
     - xdg-utils
 
