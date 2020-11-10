@@ -18,5 +18,6 @@ kernel_cmdline: >-
   rd.luks.allow-discards
   root=/dev/mapper/root
   audit=0
+  rw
 
 sccache_enable_scheduler: yes
