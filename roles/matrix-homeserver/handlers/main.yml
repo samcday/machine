@@ -12,11 +12,6 @@
     name: synapse.service
     state: restarted
 
-- name: restart mautrix-whatsapp
-  ansible.builtin.systemd:
-    name: mautrix-whatsapp.service
-    state: restarted
-
 - name: assemble homeserver.yaml
   ansible.builtin.assemble:
     src: /etc/synapse/conf.d
