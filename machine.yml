@@ -6,6 +6,7 @@
   - {name: sshd,           tags: [ssh]}
   # - {name: wireguard,      tags: [network, wireguard]}
   - {name: tailscale,      tags: [network, tailscale]}
+  - {name: snap,           tags: [snap]}
   - {name: syncthing,      tags: [syncthing]}
   - {name: restic,         tags: [restic]}
   - {name: caddy,          tags: [caddy]}
@@ -21,7 +22,6 @@
   - {name: desktop-sway,   tags: [desktop, sway]}
   - {name: desktop-gnome,  tags: [desktop, gnome]}
   - {name: desktop-apps,   tags: [desktop, desktop-apps]}
-  - {name: snap,           tags: [snap]}
   - {name: boot,           tags: [boot]}
   - {name: stats,          tags: [stats]}
   - {name: ecosia,         tags: [ecosia]}
@@ -39,3 +39,4 @@
   roles:
   - {name: matrix-homeserver, tags: [matrix, homeserver]}
   - {name: hydroxide,         tags: [hydroxide]}
+  - {name: wekan,             tags: [wekan]}

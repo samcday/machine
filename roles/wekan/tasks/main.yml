@@ -1,0 +1,48 @@
+---
+- name: install wekan
+  community.general.snap: name=wekan
+
+- name: get wekan snap config
+  shell:
+    cmd: snap get wekan
+  register: output
+
+- name: parse snap config
+  set_fact: snapconfig="{{ output.stdout | from_json }}"
+
+- name: wekan root-url
+  shell: snap set wekan root-url="https://chonk.wgme/wekan"
+  notify: restart wekan
+  when: snapconfig.get('root-url', None) != 'https://chonk.wgme/wekan'
+
+- name: wekan port
+  shell: snap set wekan port=9000
+  notify: restart wekan
+  when: snapconfig.get('port', None) != 9000
+
+- name: wekan mail-url
+  shell: snap set wekan mail-url='smtp://samcday:{{ hydroxide_password | replace("/", "%2f") }}@{{ wgme.ip }}:1025'
+  notify: restart wekan
+
+- name: wekan mail-from
+  shell: snap set wekan mail-from='Wekan <wekan@samcday.com>'
+  notify: restart wekan
+
+- name: wekan caddy-enabled
+  shell: snap set wekan caddy-enabled='true'
+  notify: restart wekan
+  when: snapconfig.get('caddy-enabled', None) != true
+
+- name: Caddy config
+  ansible.builtin.copy:
+    dest: /etc/caddy/conf.d/wekan.conf
+    content: |-
+      chonk.wgme {
+        @wekan {
+          path /wekan*
+          remote_ip 192.168.250.0/24
+        }
+        tls internal
+        reverse_proxy @wekan http://localhost:9000
+      }
+  notify: reload caddy

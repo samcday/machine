@@ -1,0 +1,8 @@
+---
+- name: reload caddy
+  ansible.builtin.systemd:
+    name: caddy.service
+    state: reloaded
+
+- name: restart wekan
+  shell: snap restart wekan

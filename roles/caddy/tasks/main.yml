@@ -10,19 +10,17 @@
   become: yes
   aur: name=caddy2
 
-- name: fix broken default Caddyfile
-  ansible.builtin.lineinfile:
-    path: /etc/caddy/Caddyfile
-    regexp: '\:80'
-    state: absent
-- name: fix broken default Caddyfile
-  ansible.builtin.lineinfile:
-    path: /etc/caddy/Caddyfile
-    regexp: 'root \*'
-    state: absent
+- name: Caddyfile
+  ansible.builtin.copy:
+    dest: /etc/caddy/Caddyfile
+    content: |
+      {
+        email me@samcday.com
+      }
+      import /etc/caddy/conf.d/*
+  notify: reload caddy
 
-- name: ensure Caddy is running+enabled
+- name: ensure Caddy is enabled
   ansible.builtin.systemd:
     name: caddy.service
-    state: started
     enabled: yes

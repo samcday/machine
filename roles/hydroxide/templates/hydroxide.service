@@ -1,3 +1,6 @@
 [Service]
 Environment=XDG_CONFIG_HOME=/root/.config
 ExecStart=hydroxide -smtp-host={{ wgme.ip }} -imap-host={{ wgme.ip }} -carddav-host={{ wgme.ip }} serve
+
+[Install]
+WantedBy=network-online.target
