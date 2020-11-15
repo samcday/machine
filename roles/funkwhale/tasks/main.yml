@@ -1,0 +1,126 @@
+---
+- name: install deps
+  become_user: aur_builder
+  aur:
+    name:
+    - curl
+    - python-pip
+    - python-virtualenv
+    - git
+    - unzip
+    - curl
+    - file
+    - ffmpeg
+    - libjpeg-turbo
+    - libpqxx
+    - python
+    - libldap
+    - libsasl
+
+- name: funkwhale user
+  ansible.builtin.user:
+    name: funkwhale
+    shell: /usr/bin/nologin
+    home: /srv/funkwhale
+    system: yes
+    create_home: no
+
+- name: enable+start services
+  with_items: [redis, postgresql]
+  ansible.builtin.systemd:
+    name: '{{ item }}.service'
+    enabled: yes
+    state: started
+
+- become_user: postgres
+  block:
+  - name: funkwhale postgres db
+    community.general.postgresql_db:
+      name: funkwhale
+      encoding: UTF-8
+
+  - name: funkwhale postgres user
+    community.general.postgresql_user:
+      name: funkwhale
+      db: funkwhale
+      priv: 'ALL'
+
+  - name: enable postgres extensions
+    with_items: [unaccent, citext]
+    community.general.postgresql_ext:
+      db: funkwhale
+      name: '{{ item }}'
+
+- name: /srv/funkwhale
+  ansible.builtin.file:
+    path: /srv/funkwhale
+    state: directory
+    owner: funkwhale
+    group: funkwhale
+
+- name: funkwhale git repo
+  become_user: funkwhale
+  vars:
+    ansible_remote_tmp: /tmp
+  ansible.builtin.git:
+    repo: https://dev.funkwhale.audio/funkwhale/funkwhale 
+    dest: /srv/funkwhale
+    version: 1.0.1
+  notify:
+  - funkwhale migrate
+  - funkwhale collectstatic
+  - restart funkwhale
+
+- name: funkwhale app dirs
+  with_items: [config, data/static, data/media, data/music]
+  ansible.builtin.file:
+    path: '/srv/funkwhale/{{ item }}'
+    state: directory
+    owner: funkwhale
+    group: funkwhale
+
+- name: install deps
+  become_user: funkwhale
+  ansible.builtin.pip:
+    requirements: /srv/funkwhale/api/requirements.txt
+    virtualenv: /srv/funkwhale/virtualenv
+  notify:
+  - restart funkwhale
+
+- name: frontend build
+  become_user: funkwhale
+  ansible.builtin.unarchive:
+    src: https://dev.funkwhale.audio/funkwhale/funkwhale/-/jobs/artifacts/1.0.1/download?job=build_front
+    remote_src: yes
+    dest: /srv/funkwhale
+  notify: restart funkwhale
+
+- name: .env
+  ansible.builtin.template:
+    src: env
+    dest: /srv/funkwhale/config/.env
+    mode: 0600
+    owner: funkwhale
+  notify: restart funkwhale
+
+- name: symlink systemd unit files
+  with_items: [funkwhale.target, funkwhale-worker.service, funkwhale-server.service, funkwhale-beat.service]
+  ansible.builtin.file:
+    path: '/etc/systemd/system/{{ item }}'
+    state: link
+    src: '/srv/funkwhale/deploy/{{ item }}'
+  notify: restart funkwhale
+
+- name: configure Caddy
+  ansible.builtin.copy:
+    dest: /etc/caddy/conf.d/matrix.conf
+    content: |
+      funkwhale.samcday.com {
+        handle_path /front/* {
+          file_server {
+            root /srv/funkwhale/front/dist/
+          }
+        }
+        reverse_proxy http://localhost:5000
+      }
+  notify: reload caddy

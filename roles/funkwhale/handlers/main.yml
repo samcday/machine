@@ -1,0 +1,25 @@
+---
+- name: restart funkwhale
+  ansible.builtin.systemd:
+    name: funkwhale.target
+    state: restarted
+    daemon_reload: yes
+
+- name: funkwhale migrate
+  become_user: funkwhale
+  community.general.django_manage:
+    command: migrate
+    app_path: /srv/funkwhale/api
+    virtualenv: /srv/funkwhale/virtualenv
+
+- name: funkwhale collectstatic
+  become_user: funkwhale
+  community.general.django_manage:
+    command: collectstatic
+    app_path: /srv/funkwhale/api
+    virtualenv: /srv/funkwhale/virtualenv
+
+- name: reload caddy
+  ansible.builtin.systemd:
+    name: caddy.service
+    state: reloaded

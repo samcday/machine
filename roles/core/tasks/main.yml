@@ -30,6 +30,7 @@
     - perl-net-smtp-ssl
     - plocate
     - procps-ng
+    - redis
     - reflector
     - ripgrep
     - rsync

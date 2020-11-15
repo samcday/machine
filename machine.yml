@@ -42,3 +42,4 @@
   - {name: hydroxide,         tags: [hydroxide]}
   - {name: wekan,             tags: [wekan]}
   - {name: postgres,          tags: [postgres]}
+  - {name: funkwhale,         tags: [funkwhale]}
