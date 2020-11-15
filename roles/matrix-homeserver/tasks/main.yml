@@ -44,6 +44,7 @@
     name: synapse
     state: started
     enabled: yes
+
 - name: configure Caddy
   ansible.builtin.copy:
     dest: /etc/caddy/conf.d/matrix.conf

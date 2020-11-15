@@ -1,0 +1,10 @@
+---
+- name: install postgres
+  become_user: aur_builder
+  aur: name=postgresql
+
+- name: init postgres DB
+  become_user: postgres
+  shell:
+    cmd: initdb --locale=en_US.UTF-8 -E UTF8 -D /var/lib/postgres/data
+    creates: /var/lib/postgres/data/postgresql.conf
