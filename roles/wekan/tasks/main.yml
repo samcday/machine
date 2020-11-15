@@ -33,16 +33,9 @@
   notify: restart wekan
   when: snapconfig.get('caddy-enabled', None) != true
 
-- name: Caddy config
+- name: caddy config
   ansible.builtin.copy:
-    dest: /etc/caddy/conf.d/wekan.conf
-    content: |-
-      chonk.wgme {
-        @wekan {
-          path /wekan*
-          remote_ip 192.168.250.0/24
-        }
-        tls internal
-        reverse_proxy @wekan http://localhost:9000
-      }
+    dest: /etc/caddy/conf.d/chonk.conf.d/wekan.conf
+    content: |
+      reverse_proxy /wekan* http://localhost:9000
   notify: reload caddy

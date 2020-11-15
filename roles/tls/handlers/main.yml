@@ -1,0 +1,3 @@
+---
+- name: install root certificate
+  shell: step-cli certificate install --all /etc/ca-certificates/extracted/cadir/wgme.pem

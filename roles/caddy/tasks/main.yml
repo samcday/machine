@@ -17,10 +17,54 @@
       {
         email me@samcday.com
       }
-      import /etc/caddy/conf.d/*
+      import /etc/caddy/conf.d/*.conf
   notify: reload caddy
+
+- name: keys.d/
+  ansible.builtin.file:
+    path: /etc/caddy/keys.d
+    state: directory
+    owner: caddy
+    group: root
+    mode: 0700
 
 - name: ensure Caddy is enabled
   ansible.builtin.systemd:
     name: caddy.service
     enabled: yes
+
+- when: inventory_hostname == 'chonk.samcday.com'
+  block:
+  - name: chonk config.d dir
+    ansible.builtin.file:
+      path: /etc/caddy/conf.d/chonk.conf.d/
+      state: directory
+
+  - name: chonk Caddy config
+    ansible.builtin.copy:
+      dest: /etc/caddy/conf.d/chonk.conf
+      content: |
+        chonk.wgme {
+          tls /etc/caddy/keys.d/chonk.crt /etc/caddy/keys.d/chonk.key {
+            client_auth {
+              trusted_ca_cert_file /etc/ca-certificates/extracted/cadir/wgme.pem
+            }
+          }
+
+          @notinternal not remote_ip 192.168.250.0/24
+          handle @notinternal {
+            respond "Whodis?" 400 {
+              close
+            }
+          }
+
+          import /etc/caddy/conf.d/chonk.conf.d/*.conf
+        }
+    notify: reload caddy
+
+  - name: chonk cert
+    with_items: [chonk.crt, chonk.key]
+    ansible.builtin.copy:
+      src: '{{ item }}'
+      dest: /etc/caddy/keys.d/
+    notify: reload caddy

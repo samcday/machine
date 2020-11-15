@@ -1,0 +1,9 @@
+---
+- name: install step-cli
+  community.general.pacman: name=step-cli
+
+- name: root certificate
+  ansible.builtin.copy:
+    src: root-ca.crt
+    dest: /etc/ca-certificates/extracted/cadir/wgme.pem
+  notify: install root certificate
