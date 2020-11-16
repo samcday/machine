@@ -1,0 +1,26 @@
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/conf.d/restic
+Environment=RESTIC_CACHE_DIR=/var/cache/restic
+ExecStart=restic forget \
+	--keep-last 96 \
+	--keep-hourly 72 \
+	--keep-daily 7 \
+	--keep-weekly 52 \
+	--keep-monthly 12 \
+	--keep-yearly 100
+
+Nice=19
+CPUSchedulingPolicy=idle
+IOSchedulingClass=idle
+IOSchedulingPriority=7
+ProtectHostname=yes
+ProtectClock=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+MemoryDenyWriteExecute=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+RemoveIPC=yes

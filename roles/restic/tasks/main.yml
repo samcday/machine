@@ -15,20 +15,28 @@
     state: directory
     mode: 0700
 
-- name: restic-snapshot.service
+- name: restic-snapshot unit files
+  with_items: [service, timer]
   ansible.builtin.copy:
-    src: restic-snapshot.service
-    dest: /etc/systemd/system/restic-snapshot.service
+    src: 'restic-snapshot.{{ item }}'
+    dest: /etc/systemd/system/
   notify: restart restic-snapshot.timer
 
-- name: restic-snapshot.timer
-  ansible.builtin.copy:
-    src: restic-snapshot.timer
-    dest: /etc/systemd/system/restic-snapshot.timer
-  notify: restart restic-snapshot.timer
-
-- name: start+enable restic-snapshot.timer
+- name: enable restic-snapshot.timer
   ansible.builtin.systemd:
     name: restic-snapshot.timer
     enabled: yes
-    state: started
+
+- when: inventory_hostname == 'chonk.samcday.com'
+  block:
+  - name: restic-prune unit files
+    with_items: [service, timer]
+    ansible.builtin.copy:
+      src: 'restic-prune.{{ item }}'
+      dest: /etc/systemd/system/
+    notify: restart restic-prune.timer
+
+  - name: enable restic-prune.timer
+    ansible.builtin.systemd:
+      name: restic-prune.timer
+      enabled: yes

@@ -4,3 +4,9 @@
     name: restic-snapshot.timer
     state: restarted
     daemon_reload: yes
+
+- name: restart restic-prune.timer
+  ansible.builtin.systemd:
+    name: restic-prune.timer
+    state: restarted
+    daemon_reload: yes
