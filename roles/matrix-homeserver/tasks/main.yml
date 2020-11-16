@@ -11,7 +11,7 @@
   become_user: aur_builder
   become: yes
   aur: name={{ item }}
-  with_items: [mautrix-signal-git, mautrix-whatsapp]
+  with_items: [mautrix-signal-git]
 
 - name: synapse log.yaml
   ansible.builtin.copy:

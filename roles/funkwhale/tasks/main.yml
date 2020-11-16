@@ -113,7 +113,7 @@
 
 - name: configure Caddy
   ansible.builtin.copy:
-    dest: /etc/caddy/conf.d/matrix.conf
+    dest: /etc/caddy/conf.d/funkwhale.conf
     content: |
       funkwhale.samcday.com {
         handle_path /front/* {
