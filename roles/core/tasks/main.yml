@@ -81,10 +81,13 @@
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: /usr/bin/visudo -cf %s
 
-- name: enable en_US UTF8 locale
+- name: enable locale
   community.general.locale_gen:
-    name: en_US.UTF-8
+    name: '{{ item }}'
     state: present
+  with_items:
+  - ko_KR.UTF-8
+  - en_US.UTF-8
 
 - name: set locale.conf
   ansible.builtin.copy:

@@ -3,6 +3,7 @@
   become_user: aur_builder
   aur:
     name:
+    - adobe-source-han-sans-kr-fonts
     - alsa-utils
     - brightnessctl
     - gammastep
