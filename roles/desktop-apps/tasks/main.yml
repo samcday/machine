@@ -3,7 +3,7 @@
   pacman_key:
     id: '{{ item.id }}'
     fingerprint: '{{ item.fingerprint }}'
-    keyserver: keyserver.ubuntu.com
+    keyserver: keys.openpgp.org
   with_items:
   - id: ADAE6AD28A8F901A
     fingerprint: 1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A
@@ -21,8 +21,8 @@
   with_items:
   - name: sublime-text
     server: https://download.sublimetext.com/arch/stable/x86_64
-  # - name: jk-aur
-  #   server: https://repo.vin.ovh/arch/$arch
+  - name: jk-aur
+    server: https://repo.vin.ovh/arch/$arch
 
 - meta: flush_handlers
 
@@ -36,5 +36,5 @@
     - obs-studio-wayland
     - slack-desktop
     - sublime-text
-    # - ungoogled-chromium
+    - ungoogled-chromium
     - wlrobs
