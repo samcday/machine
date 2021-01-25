@@ -22,10 +22,10 @@
     dest: /etc/systemd/system/
   notify: restart restic-snapshot.timer
 
-- name: enable restic-snapshot.timer
+- name: disable restic-snapshot.timer
   ansible.builtin.systemd:
     name: restic-snapshot.timer
-    enabled: yes
+    enabled: no
 
 - when: inventory_hostname == 'chonk.samcday.com'
   block:
