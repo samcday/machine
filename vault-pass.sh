@@ -1,5 +1,5 @@
 #!/bin/bash
-password=$(secret-tool lookup ansible-vault samcday/machine)
+password=${VAULT_PASS:-$(secret-tool lookup ansible-vault samcday/machine)}
 
 if [[ -z "${password}" ]]; then
 	password=$(zenity --password)

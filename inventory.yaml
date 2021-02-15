@@ -2,9 +2,8 @@ all:
   children:
     workstations:
       hosts:
-        sam-macbook:
         sam-desktop:
-        sam-xps:
+        sam-librem:
     servers:
       hosts:
         chonk.samcday.com:

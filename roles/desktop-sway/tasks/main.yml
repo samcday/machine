@@ -26,7 +26,7 @@
     name: '{{ item }}'
     state: present
   with_items:
-  - gtk-layer-shell-git
+  - gtk-layer-shell
   # Needed for unreleased merge from back in March:
   # https://github.com/swaywm/swayidle/pull/63/files
   - swayidle-git

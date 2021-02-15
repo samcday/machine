@@ -34,7 +34,6 @@
     - reflector
     - ripgrep
     - rsync
-    - rustup
     - sshfs
     - strace
     - sudo
@@ -138,9 +137,9 @@
     src: reflector.hook
     dest: /etc/pacman.d/hooks/
 
-- name: enable plocate-build
+- name: enable plocate-updatedb
   ansible.builtin.systemd:
-    name: plocate-build.service
+    name: plocate-updatedb.service
     enabled: yes
 
 - name: enable+start updatedb.timer

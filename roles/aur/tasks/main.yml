@@ -28,6 +28,9 @@
       regexp: 'keyserver\s+'
       line: 'keyserver hkp://keyserver.ubuntu.com'
 
+- name: install rustup
+  community.general.pacman: name=rustup
+
 - become: yes
   become_user: aur_builder
   block:

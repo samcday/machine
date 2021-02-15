@@ -3,7 +3,7 @@
   pacman_key:
     id: '{{ item.id }}'
     fingerprint: '{{ item.fingerprint }}'
-    keyserver: keys.openpgp.org
+    keyserver: keyserver.ubuntu.com
   with_items:
   - id: ADAE6AD28A8F901A
     fingerprint: 1EDDE2CDFC025D17F6DA9EC0ADAE6AD28A8F901A

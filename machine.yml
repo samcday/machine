@@ -9,9 +9,9 @@
   - {name: tailscale,      tags: [network, tailscale]}
   - {name: snap,           tags: [snap]}
   - {name: syncthing,      tags: [syncthing]}
-  - {name: restic,         tags: [restic]}
+#  - {name: restic,         tags: [restic]}
   - {name: caddy,          tags: [caddy]}
-  - {name: sccache,        tags: [sccache]}
+#  - {name: sccache,        tags: [sccache]}
 
 - hosts: workstations
   roles:
@@ -23,8 +23,8 @@
   - {name: desktop-sway,   tags: [desktop, sway]}
   - {name: desktop-gnome,  tags: [desktop, gnome]}
   - {name: desktop-apps,   tags: [desktop, desktop-apps]}
-  - {name: boot,           tags: [boot]}
-  - {name: stats,          tags: [stats]}
+#  - {name: boot,           tags: [boot]}
+#  - {name: stats,          tags: [stats]}
   - {name: ecosia,         tags: [ecosia]}
 
 - hosts: sam-desktop
