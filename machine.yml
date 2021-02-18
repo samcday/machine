@@ -25,7 +25,6 @@
   - {name: desktop-apps,   tags: [desktop, desktop-apps]}
 #  - {name: boot,           tags: [boot]}
 #  - {name: stats,          tags: [stats]}
-  - {name: ecosia,         tags: [ecosia]}
 
 - hosts: sam-desktop
   tasks:
